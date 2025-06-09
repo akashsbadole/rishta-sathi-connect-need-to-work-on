@@ -20,7 +20,7 @@ const FeaturesSection = () => {
       icon: Heart,
       title: "Horoscope Matching",
       description: "Traditional kundli matching with detailed astrological compatibility",
-      color: "from-pink-500 to-rose-600"
+      color: "from-red-500 to-pink-600"
     },
     {
       icon: Users,
@@ -77,7 +77,7 @@ const FeaturesSection = () => {
                 <div className={`w-16 h-16 mx-auto rounded-2xl bg-gradient-to-br ${feature.color} flex items-center justify-center mb-4 group-hover:scale-110 transition-transform duration-300`}>
                   <feature.icon className="w-8 h-8 text-white" />
                 </div>
-                <CardTitle className="text-lg font-bold text-gray-800 group-hover:text-transparent group-hover:bg-clip-text group-hover:bg-gradient-to-r group-hover:from-rose-600 group-hover:to-orange-600 transition-all duration-300">
+                <CardTitle className="text-lg font-bold text-gray-800 group-hover:text-transparent group-hover:bg-clip-text group-hover:bg-gradient-to-r group-hover:from-purple-600 group-hover:to-blue-600 transition-all duration-300">
                   {feature.title}
                 </CardTitle>
               </CardHeader>
@@ -91,23 +91,23 @@ const FeaturesSection = () => {
         </div>
 
         {/* Trust Indicators */}
-        <div className="mt-16 bg-gradient-to-r from-rose-900 to-red-900 rounded-3xl p-8 text-white">
+        <div className="mt-16 bg-gradient-to-r from-purple-900 via-blue-900 to-red-900 rounded-3xl p-8 text-white">
           <div className="grid md:grid-cols-4 gap-8 text-center">
             <div>
               <div className="text-3xl font-bold mb-2">2.5L+</div>
-              <div className="text-rose-200">Active Profiles</div>
+              <div className="text-purple-200">Active Profiles</div>
             </div>
             <div>
               <div className="text-3xl font-bold mb-2">25K+</div>
-              <div className="text-rose-200">Success Stories</div>
+              <div className="text-purple-200">Success Stories</div>
             </div>
             <div>
               <div className="text-3xl font-bold mb-2">15+</div>
-              <div className="text-rose-200">Years of Trust</div>
+              <div className="text-purple-200">Years of Trust</div>
             </div>
             <div>
               <div className="text-3xl font-bold mb-2">99%</div>
-              <div className="text-rose-200">Customer Satisfaction</div>
+              <div className="text-purple-200">Customer Satisfaction</div>
             </div>
           </div>
         </div>

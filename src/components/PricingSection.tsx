@@ -47,7 +47,7 @@ const PricingSection = () => {
       period: "6 months",
       description: "Enhanced features for serious seekers",
       popular: false,
-      color: "from-yellow-500 to-orange-600",
+      color: "from-purple-500 to-pink-600",
       features: [
         "Everything in Silver",
         "Featured profile listing",
@@ -65,7 +65,7 @@ const PricingSection = () => {
       period: "12 months",
       description: "Complete matrimony solution",
       popular: false,
-      color: "from-purple-500 to-indigo-600",
+      color: "from-red-500 to-orange-600",
       features: [
         "Everything in Gold",
         "Profile verification assistance",
@@ -95,11 +95,11 @@ const PricingSection = () => {
             <Card 
               key={index} 
               className={`relative group hover:shadow-2xl transition-all duration-300 hover:-translate-y-2 ${
-                plan.popular ? 'border-2 border-rose-500 shadow-lg' : 'border shadow-md'
+                plan.popular ? 'border-2 border-purple-500 shadow-lg' : 'border shadow-md'
               }`}
             >
               {plan.popular && (
-                <Badge className="absolute -top-3 left-1/2 transform -translate-x-1/2 bg-gradient-to-r from-rose-500 to-red-600 text-white px-4 py-1">
+                <Badge className="absolute -top-3 left-1/2 transform -translate-x-1/2 bg-gradient-to-r from-purple-500 to-blue-600 text-white px-4 py-1">
                   Most Popular
                 </Badge>
               )}
@@ -133,7 +133,7 @@ const PricingSection = () => {
                 <Button 
                   className={`w-full py-3 text-white font-semibold ${
                     plan.popular 
-                      ? 'bg-gradient-to-r from-rose-500 to-red-600 hover:from-rose-600 hover:to-red-700' 
+                      ? 'bg-gradient-to-r from-purple-600 to-blue-600 hover:from-purple-700 hover:to-blue-700' 
                       : `bg-gradient-to-r ${plan.color} hover:opacity-90`
                   } transition-all duration-200`}
                 >
@@ -145,9 +145,9 @@ const PricingSection = () => {
         </div>
 
         {/* Money Back Guarantee */}
-        <div className="text-center mt-12 p-6 bg-gradient-to-r from-green-50 to-blue-50 rounded-2xl">
+        <div className="text-center mt-12 p-6 bg-gradient-to-r from-purple-50 to-blue-50 rounded-2xl">
           <div className="flex items-center justify-center space-x-2 mb-2">
-            <Shield className="w-6 h-6 text-green-600" />
+            <Shield className="w-6 h-6 text-purple-600" />
             <span className="text-lg font-semibold text-gray-800">100% Money Back Guarantee</span>
           </div>
           <p className="text-gray-600">

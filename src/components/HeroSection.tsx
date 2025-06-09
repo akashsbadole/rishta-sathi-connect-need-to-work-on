@@ -20,7 +20,7 @@ const HeroSection = () => {
   ];
 
   return (
-    <section className="relative min-h-[600px] bg-gradient-to-br from-rose-950 via-red-900 to-orange-900 overflow-hidden">
+    <section className="relative min-h-[600px] bg-gradient-to-br from-purple-900 via-blue-900 to-red-900 overflow-hidden">
       {/* Background Pattern */}
       <div className="absolute inset-0 opacity-10">
         <div className="absolute top-20 left-10 w-32 h-32 border border-white rounded-full"></div>
@@ -36,11 +36,11 @@ const HeroSection = () => {
             <div className="space-y-4">
               <h1 className="text-4xl md:text-6xl font-bold leading-tight">
                 Find Your
-                <span className="block text-transparent bg-clip-text bg-gradient-to-r from-yellow-400 to-orange-500">
+                <span className="block text-transparent bg-clip-text bg-gradient-to-r from-pink-400 to-purple-400">
                   Perfect Match
                 </span>
               </h1>
-              <p className="text-xl text-rose-200 leading-relaxed">
+              <p className="text-xl text-purple-200 leading-relaxed">
                 India's most trusted matrimony platform connecting hearts, families, and traditions.
                 Your journey to happily ever after starts here.
               </p>
@@ -50,18 +50,18 @@ const HeroSection = () => {
             <div className="grid grid-cols-3 gap-4 py-6">
               {stats.map((stat, index) => (
                 <div key={index} className="text-center space-y-2">
-                  <stat.icon className="w-8 h-8 mx-auto text-yellow-400" />
+                  <stat.icon className="w-8 h-8 mx-auto text-pink-400" />
                   <div className="text-2xl font-bold">{stat.value}</div>
-                  <div className="text-sm text-rose-200">{stat.label}</div>
+                  <div className="text-sm text-purple-200">{stat.label}</div>
                 </div>
               ))}
             </div>
 
             <div className="flex flex-col sm:flex-row gap-4">
-              <Button className="bg-gradient-to-r from-yellow-400 to-orange-500 text-white hover:from-yellow-500 hover:to-orange-600 px-8 py-3 text-lg font-semibold transform hover:scale-105 transition-all duration-200">
+              <Button className="bg-gradient-to-r from-pink-500 to-purple-600 text-white hover:from-pink-600 hover:to-purple-700 px-8 py-3 text-lg font-semibold transform hover:scale-105 transition-all duration-200">
                 Register Free
               </Button>
-              <Button variant="outline" className="border-white text-white hover:bg-white hover:text-rose-900 px-8 py-3 text-lg font-semibold">
+              <Button variant="outline" className="border-white text-white hover:bg-white hover:text-purple-900 px-8 py-3 text-lg font-semibold">
                 View Success Stories
               </Button>
             </div>
@@ -135,7 +135,7 @@ const HeroSection = () => {
                 />
               </div>
 
-              <Button className="w-full bg-gradient-to-r from-rose-600 to-red-600 hover:from-rose-700 hover:to-red-700 text-white py-3 text-lg font-semibold">
+              <Button className="w-full bg-gradient-to-r from-purple-600 to-blue-600 hover:from-purple-700 hover:to-blue-700 text-white py-3 text-lg font-semibold">
                 <Search className="w-5 h-5 mr-2" />
                 Search Profiles
               </Button>
@@ -143,7 +143,7 @@ const HeroSection = () => {
 
             <div className="text-center mt-4">
               <p className="text-sm text-gray-600">
-                Over <span className="font-semibold text-rose-600">2.5 Lakh</span> verified profiles
+                Over <span className="font-semibold text-purple-600">2.5 Lakh</span> verified profiles
               </p>
             </div>
           </div>
