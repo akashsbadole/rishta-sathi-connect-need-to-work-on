@@ -1,6 +1,7 @@
 
 import { useState } from "react";
 import { Heart, User, Bell, Search, Menu, X, MessageCircle, Users, Settings, LogOut } from "lucide-react";
+import { Link, useLocation } from "react-router-dom";
 import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
 import { 
@@ -16,13 +17,16 @@ const Header = () => {
   const [notifications] = useState(5);
   const [messages] = useState(3);
   const [isLoggedIn] = useState(true);
+  const location = useLocation();
+
+  const isActive = (path: string) => location.pathname === path;
 
   return (
     <header className="bg-gradient-to-r from-purple-900 via-blue-900 to-red-900 text-white shadow-lg sticky top-0 z-50">
       <div className="container mx-auto px-4">
         <div className="flex items-center justify-between h-16">
           {/* Logo */}
-          <div className="flex items-center space-x-2">
+          <Link to="/" className="flex items-center space-x-2">
             <div className="w-10 h-10 bg-gradient-to-br from-pink-400 to-purple-500 rounded-full flex items-center justify-center">
               <Heart className="w-6 h-6 text-white" />
             </div>
@@ -30,25 +34,57 @@ const Header = () => {
               <h1 className="text-xl font-bold">Rishta Sathi</h1>
               <p className="text-xs text-purple-200">Perfect Matches, Perfect Lives</p>
             </div>
-          </div>
+          </Link>
 
           {/* Desktop Navigation */}
           <nav className="hidden md:flex items-center space-x-6">
-            <a href="#" className="hover:text-purple-200 transition-colors duration-200">Browse Profiles</a>
-            <a href="#" className="hover:text-purple-200 transition-colors duration-200">My Matches</a>
-            <a href="#" className="hover:text-purple-200 transition-colors duration-200">Interests</a>
-            <a href="#" className="hover:text-purple-200 transition-colors duration-200">Messages</a>
-            <a href="#" className="hover:text-purple-200 transition-colors duration-200">Search</a>
-            <a href="#" className="hover:text-purple-200 transition-colors duration-200">Success Stories</a>
+            <Link 
+              to="/search" 
+              className={`hover:text-purple-200 transition-colors duration-200 ${isActive('/search') ? 'text-purple-200' : ''}`}
+            >
+              Browse Profiles
+            </Link>
+            <Link 
+              to="/search" 
+              className={`hover:text-purple-200 transition-colors duration-200 ${isActive('/matches') ? 'text-purple-200' : ''}`}
+            >
+              My Matches
+            </Link>
+            <Link 
+              to="/search" 
+              className={`hover:text-purple-200 transition-colors duration-200 ${isActive('/interests') ? 'text-purple-200' : ''}`}
+            >
+              Interests
+            </Link>
+            <Link 
+              to="/search" 
+              className={`hover:text-purple-200 transition-colors duration-200 ${isActive('/messages') ? 'text-purple-200' : ''}`}
+            >
+              Messages
+            </Link>
+            <Link 
+              to="/search" 
+              className={`hover:text-purple-200 transition-colors duration-200 ${isActive('/search') ? 'text-purple-200' : ''}`}
+            >
+              Search
+            </Link>
+            <Link 
+              to="/" 
+              className={`hover:text-purple-200 transition-colors duration-200 ${isActive('/success-stories') ? 'text-purple-200' : ''}`}
+            >
+              Success Stories
+            </Link>
           </nav>
 
           {/* Desktop Actions */}
           <div className="hidden md:flex items-center space-x-3">
             {isLoggedIn ? (
               <>
-                <Button variant="ghost" size="sm" className="text-white hover:bg-purple-800">
-                  <Search className="w-4 h-4" />
-                </Button>
+                <Link to="/search">
+                  <Button variant="ghost" size="sm" className="text-white hover:bg-purple-800">
+                    <Search className="w-4 h-4" />
+                  </Button>
+                </Link>
                 <Button variant="ghost" size="sm" className="text-white hover:bg-purple-800 relative">
                   <MessageCircle className="w-4 h-4" />
                   {messages > 0 && (
@@ -101,9 +137,11 @@ const Header = () => {
                 <Button variant="ghost" className="text-white hover:bg-purple-800">
                   Login
                 </Button>
-                <Button className="bg-gradient-to-r from-pink-500 to-purple-600 text-white hover:from-pink-600 hover:to-purple-700">
-                  Register Free
-                </Button>
+                <Link to="/register">
+                  <Button className="bg-gradient-to-r from-pink-500 to-purple-600 text-white hover:from-pink-600 hover:to-purple-700">
+                    Register Free
+                  </Button>
+                </Link>
               </>
             )}
           </div>
@@ -121,12 +159,48 @@ const Header = () => {
         {isMenuOpen && (
           <div className="md:hidden py-4 border-t border-purple-700">
             <nav className="flex flex-col space-y-3">
-              <a href="#" className="hover:text-purple-200 transition-colors duration-200">Browse Profiles</a>
-              <a href="#" className="hover:text-purple-200 transition-colors duration-200">My Matches</a>
-              <a href="#" className="hover:text-purple-200 transition-colors duration-200">Interests</a>
-              <a href="#" className="hover:text-purple-200 transition-colors duration-200">Messages</a>
-              <a href="#" className="hover:text-purple-200 transition-colors duration-200">Search</a>
-              <a href="#" className="hover:text-purple-200 transition-colors duration-200">Success Stories</a>
+              <Link 
+                to="/search" 
+                className="hover:text-purple-200 transition-colors duration-200"
+                onClick={() => setIsMenuOpen(false)}
+              >
+                Browse Profiles
+              </Link>
+              <Link 
+                to="/search" 
+                className="hover:text-purple-200 transition-colors duration-200"
+                onClick={() => setIsMenuOpen(false)}
+              >
+                My Matches
+              </Link>
+              <Link 
+                to="/search" 
+                className="hover:text-purple-200 transition-colors duration-200"
+                onClick={() => setIsMenuOpen(false)}
+              >
+                Interests
+              </Link>
+              <Link 
+                to="/search" 
+                className="hover:text-purple-200 transition-colors duration-200"
+                onClick={() => setIsMenuOpen(false)}
+              >
+                Messages
+              </Link>
+              <Link 
+                to="/search" 
+                className="hover:text-purple-200 transition-colors duration-200"
+                onClick={() => setIsMenuOpen(false)}
+              >
+                Search
+              </Link>
+              <Link 
+                to="/" 
+                className="hover:text-purple-200 transition-colors duration-200"
+                onClick={() => setIsMenuOpen(false)}
+              >
+                Success Stories
+              </Link>
               <div className="flex items-center space-x-3 pt-3">
                 {isLoggedIn ? (
                   <>
@@ -143,9 +217,11 @@ const Header = () => {
                     <Button variant="ghost" className="text-white hover:bg-purple-800">
                       Login
                     </Button>
-                    <Button className="bg-gradient-to-r from-pink-500 to-purple-600 text-white hover:from-pink-600 hover:to-purple-700">
-                      Register Free
-                    </Button>
+                    <Link to="/register">
+                      <Button className="bg-gradient-to-r from-pink-500 to-purple-600 text-white hover:from-pink-600 hover:to-purple-700">
+                        Register Free
+                      </Button>
+                    </Link>
                   </>
                 )}
               </div>
