@@ -1,5 +1,5 @@
 
-import { Check, Star, Crown, Diamond } from "lucide-react";
+import { Check, Star, Crown, Diamond, Shield } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
