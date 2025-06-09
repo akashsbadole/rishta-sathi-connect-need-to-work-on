@@ -1,4 +1,3 @@
-
 import { useState } from "react";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
@@ -9,7 +8,8 @@ import { RadioGroup, RadioGroupItem } from "@/components/ui/radio-group";
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import { Progress } from "@/components/ui/progress";
-import { User, Heart, GraduationCap, Briefcase, Users, Home, Camera, CheckCircle } from "lucide-react";
+import { Textarea } from "@/components/ui/textarea";
+import { User, Heart, GraduationCap, Briefcase, Users, Home, Camera, CheckCircle, MapPin, Star } from "lucide-react";
 
 const Registration = () => {
   const [step, setStep] = useState(1);
@@ -355,14 +355,327 @@ const Registration = () => {
             </div>
           </div>
         );
+
+      case 3:
+        return (
+          <div className="space-y-6">
+            <div className="text-center">
+              <MapPin className="w-12 h-12 text-green-600 mx-auto mb-4" />
+              <h3 className="text-xl font-semibold">Location Details</h3>
+              <p className="text-gray-600">Where are you located?</p>
+            </div>
+            
+            <div className="grid md:grid-cols-2 gap-4">
+              <div>
+                <Label htmlFor="country">Country</Label>
+                <Select onValueChange={(value) => updateFormData("country", value)}>
+                  <SelectTrigger>
+                    <SelectValue placeholder="Select country" />
+                  </SelectTrigger>
+                  <SelectContent>
+                    <SelectItem value="india">India</SelectItem>
+                    <SelectItem value="usa">USA</SelectItem>
+                    <SelectItem value="uk">UK</SelectItem>
+                    <SelectItem value="canada">Canada</SelectItem>
+                    <SelectItem value="australia">Australia</SelectItem>
+                  </SelectContent>
+                </Select>
+              </div>
+              
+              <div>
+                <Label htmlFor="state">State</Label>
+                <Select onValueChange={(value) => updateFormData("state", value)}>
+                  <SelectTrigger>
+                    <SelectValue placeholder="Select state" />
+                  </SelectTrigger>
+                  <SelectContent>
+                    <SelectItem value="maharashtra">Maharashtra</SelectItem>
+                    <SelectItem value="delhi">Delhi</SelectItem>
+                    <SelectItem value="gujarat">Gujarat</SelectItem>
+                    <SelectItem value="karnataka">Karnataka</SelectItem>
+                    <SelectItem value="tamil-nadu">Tamil Nadu</SelectItem>
+                  </SelectContent>
+                </Select>
+              </div>
+              
+              <div>
+                <Label htmlFor="city">City</Label>
+                <Input 
+                  id="city"
+                  value={formData.city}
+                  onChange={(e) => updateFormData("city", e.target.value)}
+                  placeholder="Enter your city"
+                />
+              </div>
+              
+              <div>
+                <Label htmlFor="pincode">Pin Code</Label>
+                <Input 
+                  id="pincode"
+                  value={formData.pincode}
+                  onChange={(e) => updateFormData("pincode", e.target.value)}
+                  placeholder="Enter pin code"
+                />
+              </div>
+            </div>
+          </div>
+        );
+
+      case 4:
+        return (
+          <div className="space-y-6">
+            <div className="text-center">
+              <Star className="w-12 h-12 text-yellow-600 mx-auto mb-4" />
+              <h3 className="text-xl font-semibold">Religious Details</h3>
+              <p className="text-gray-600">Your religious and cultural background</p>
+            </div>
+            
+            <div className="grid md:grid-cols-2 gap-4">
+              <div>
+                <Label htmlFor="religion">Religion</Label>
+                <Select onValueChange={(value) => updateFormData("religion", value)}>
+                  <SelectTrigger>
+                    <SelectValue placeholder="Select religion" />
+                  </SelectTrigger>
+                  <SelectContent>
+                    <SelectItem value="hindu">Hindu</SelectItem>
+                    <SelectItem value="muslim">Muslim</SelectItem>
+                    <SelectItem value="christian">Christian</SelectItem>
+                    <SelectItem value="sikh">Sikh</SelectItem>
+                    <SelectItem value="buddhist">Buddhist</SelectItem>
+                    <SelectItem value="jain">Jain</SelectItem>
+                  </SelectContent>
+                </Select>
+              </div>
+              
+              <div>
+                <Label htmlFor="caste">Caste</Label>
+                <Input 
+                  id="caste"
+                  value={formData.caste}
+                  onChange={(e) => updateFormData("caste", e.target.value)}
+                  placeholder="Enter caste"
+                />
+              </div>
+              
+              <div>
+                <Label htmlFor="subCaste">Sub Caste</Label>
+                <Input 
+                  id="subCaste"
+                  value={formData.subCaste}
+                  onChange={(e) => updateFormData("subCaste", e.target.value)}
+                  placeholder="Enter sub caste"
+                />
+              </div>
+              
+              <div>
+                <Label htmlFor="manglik">Manglik Status</Label>
+                <Select onValueChange={(value) => updateFormData("manglik", value)}>
+                  <SelectTrigger>
+                    <SelectValue placeholder="Select manglik status" />
+                  </SelectTrigger>
+                  <SelectContent>
+                    <SelectItem value="yes">Yes</SelectItem>
+                    <SelectItem value="no">No</SelectItem>
+                    <SelectItem value="anshik">Anshik</SelectItem>
+                    <SelectItem value="dont-know">Don't Know</SelectItem>
+                  </SelectContent>
+                </Select>
+              </div>
+            </div>
+          </div>
+        );
+
+      case 5:
+        return (
+          <div className="space-y-6">
+            <div className="text-center">
+              <GraduationCap className="w-12 h-12 text-blue-600 mx-auto mb-4" />
+              <h3 className="text-xl font-semibold">Education & Career</h3>
+              <p className="text-gray-600">Your educational and professional background</p>
+            </div>
+            
+            <div className="grid md:grid-cols-2 gap-4">
+              <div>
+                <Label htmlFor="education">Highest Education</Label>
+                <Select onValueChange={(value) => updateFormData("education", value)}>
+                  <SelectTrigger>
+                    <SelectValue placeholder="Select education" />
+                  </SelectTrigger>
+                  <SelectContent>
+                    <SelectItem value="high-school">High School</SelectItem>
+                    <SelectItem value="diploma">Diploma</SelectItem>
+                    <SelectItem value="bachelors">Bachelor's Degree</SelectItem>
+                    <SelectItem value="masters">Master's Degree</SelectItem>
+                    <SelectItem value="doctorate">Doctorate</SelectItem>
+                  </SelectContent>
+                </Select>
+              </div>
+              
+              <div>
+                <Label htmlFor="occupation">Occupation</Label>
+                <Select onValueChange={(value) => updateFormData("occupation", value)}>
+                  <SelectTrigger>
+                    <SelectValue placeholder="Select occupation" />
+                  </SelectTrigger>
+                  <SelectContent>
+                    <SelectItem value="software-engineer">Software Engineer</SelectItem>
+                    <SelectItem value="doctor">Doctor</SelectItem>
+                    <SelectItem value="teacher">Teacher</SelectItem>
+                    <SelectItem value="business">Business</SelectItem>
+                    <SelectItem value="government-job">Government Job</SelectItem>
+                  </SelectContent>
+                </Select>
+              </div>
+              
+              <div>
+                <Label htmlFor="annualIncome">Annual Income</Label>
+                <Select onValueChange={(value) => updateFormData("annualIncome", value)}>
+                  <SelectTrigger>
+                    <SelectValue placeholder="Select income range" />
+                  </SelectTrigger>
+                  <SelectContent>
+                    <SelectItem value="2-4-lakhs">2-4 Lakhs</SelectItem>
+                    <SelectItem value="4-6-lakhs">4-6 Lakhs</SelectItem>
+                    <SelectItem value="6-8-lakhs">6-8 Lakhs</SelectItem>
+                    <SelectItem value="8-10-lakhs">8-10 Lakhs</SelectItem>
+                    <SelectItem value="10-lakhs+">10+ Lakhs</SelectItem>
+                  </SelectContent>
+                </Select>
+              </div>
+              
+              <div>
+                <Label htmlFor="workLocation">Work Location</Label>
+                <Input 
+                  id="workLocation"
+                  value={formData.workLocation}
+                  onChange={(e) => updateFormData("workLocation", e.target.value)}
+                  placeholder="Enter work location"
+                />
+              </div>
+            </div>
+          </div>
+        );
+
+      case 6:
+        return (
+          <div className="space-y-6">
+            <div className="text-center">
+              <Users className="w-12 h-12 text-indigo-600 mx-auto mb-4" />
+              <h3 className="text-xl font-semibold">Family Details</h3>
+              <p className="text-gray-600">Tell us about your family</p>
+            </div>
+            
+            <div className="grid md:grid-cols-2 gap-4">
+              <div>
+                <Label htmlFor="familyType">Family Type</Label>
+                <Select onValueChange={(value) => updateFormData("familyType", value)}>
+                  <SelectTrigger>
+                    <SelectValue placeholder="Select family type" />
+                  </SelectTrigger>
+                  <SelectContent>
+                    <SelectItem value="nuclear">Nuclear</SelectItem>
+                    <SelectItem value="joint">Joint</SelectItem>
+                    <SelectItem value="others">Others</SelectItem>
+                  </SelectContent>
+                </Select>
+              </div>
+              
+              <div>
+                <Label htmlFor="familyValues">Family Values</Label>
+                <Select onValueChange={(value) => updateFormData("familyValues", value)}>
+                  <SelectTrigger>
+                    <SelectValue placeholder="Select family values" />
+                  </SelectTrigger>
+                  <SelectContent>
+                    <SelectItem value="orthodox">Orthodox</SelectItem>
+                    <SelectItem value="traditional">Traditional</SelectItem>
+                    <SelectItem value="moderate">Moderate</SelectItem>
+                    <SelectItem value="liberal">Liberal</SelectItem>
+                  </SelectContent>
+                </Select>
+              </div>
+              
+              <div>
+                <Label htmlFor="fatherOccupation">Father's Occupation</Label>
+                <Input 
+                  id="fatherOccupation"
+                  value={formData.fatherOccupation}
+                  onChange={(e) => updateFormData("fatherOccupation", e.target.value)}
+                  placeholder="Father's occupation"
+                />
+              </div>
+              
+              <div>
+                <Label htmlFor="motherOccupation">Mother's Occupation</Label>
+                <Input 
+                  id="motherOccupation"
+                  value={formData.motherOccupation}
+                  onChange={(e) => updateFormData("motherOccupation", e.target.value)}
+                  placeholder="Mother's occupation"
+                />
+              </div>
+            </div>
+          </div>
+        );
+
+      case 7:
+        return (
+          <div className="space-y-6">
+            <div className="text-center">
+              <Heart className="w-12 h-12 text-pink-600 mx-auto mb-4" />
+              <h3 className="text-xl font-semibold">About You</h3>
+              <p className="text-gray-600">Tell us more about yourself</p>
+            </div>
+            
+            <div className="space-y-4">
+              <div>
+                <Label htmlFor="aboutMe">About Me</Label>
+                <Textarea 
+                  id="aboutMe"
+                  value={formData.aboutMe}
+                  onChange={(e) => updateFormData("aboutMe", e.target.value)}
+                  placeholder="Write a brief description about yourself..."
+                  rows={4}
+                />
+              </div>
+              
+              <div>
+                <Label htmlFor="lookingFor">What I'm Looking For</Label>
+                <Textarea 
+                  id="lookingFor"
+                  value={formData.lookingFor}
+                  onChange={(e) => updateFormData("lookingFor", e.target.value)}
+                  placeholder="Describe what you're looking for in a partner..."
+                  rows={4}
+                />
+              </div>
+              
+              <div>
+                <Label htmlFor="hobbies">Hobbies & Interests</Label>
+                <Input 
+                  id="hobbies"
+                  value={formData.hobbies}
+                  onChange={(e) => updateFormData("hobbies", e.target.value)}
+                  placeholder="e.g., Reading, Traveling, Music, Sports..."
+                />
+              </div>
+            </div>
+          </div>
+        );
         
-      // Continue with other steps...
       default:
         return (
           <div className="text-center space-y-4">
             <CheckCircle className="w-16 h-16 text-green-500 mx-auto" />
             <h3 className="text-2xl font-semibold">Registration Complete!</h3>
             <p className="text-gray-600">Your profile has been created successfully.</p>
+            <Button 
+              onClick={() => window.location.href = "/dashboard"}
+              className="bg-gradient-to-r from-green-600 to-blue-600 hover:from-green-700 hover:to-blue-700"
+            >
+              Go to Dashboard
+            </Button>
           </div>
         );
     }

@@ -53,19 +53,19 @@ const Header = () => {
                   Browse Profiles
                 </Link>
                 <Link 
-                  to="/search" 
+                  to="/matches" 
                   className={`hover:text-purple-200 transition-colors duration-200 ${isActive('/matches') ? 'text-purple-200' : ''}`}
                 >
                   My Matches
                 </Link>
                 <Link 
-                  to="/search" 
+                  to="/interests" 
                   className={`hover:text-purple-200 transition-colors duration-200 ${isActive('/interests') ? 'text-purple-200' : ''}`}
                 >
                   Interests
                 </Link>
                 <Link 
-                  to="/search" 
+                  to="/messages" 
                   className={`hover:text-purple-200 transition-colors duration-200 ${isActive('/messages') ? 'text-purple-200' : ''}`}
                 >
                   Messages
@@ -98,14 +98,16 @@ const Header = () => {
                     <Search className="w-4 h-4" />
                   </Button>
                 </Link>
-                <Button variant="ghost" size="sm" className="text-white hover:bg-purple-800 relative">
-                  <MessageCircle className="w-4 h-4" />
-                  {messages > 0 && (
-                    <Badge className="absolute -top-1 -right-1 w-5 h-5 text-xs bg-red-500 text-white">
-                      {messages}
-                    </Badge>
-                  )}
-                </Button>
+                <Link to="/messages">
+                  <Button variant="ghost" size="sm" className="text-white hover:bg-purple-800 relative">
+                    <MessageCircle className="w-4 h-4" />
+                    {messages > 0 && (
+                      <Badge className="absolute -top-1 -right-1 w-5 h-5 text-xs bg-red-500 text-white">
+                        {messages}
+                      </Badge>
+                    )}
+                  </Button>
+                </Link>
                 <Button variant="ghost" size="sm" className="text-white hover:bg-purple-800 relative">
                   <Bell className="w-4 h-4" />
                   {notifications > 0 && (
@@ -149,9 +151,11 @@ const Header = () => {
               </>
             ) : (
               <>
-                <Button variant="ghost" className="text-white hover:bg-purple-800">
-                  Login
-                </Button>
+                <Link to="/login">
+                  <Button variant="ghost" className="text-white hover:bg-purple-800">
+                    Login
+                  </Button>
+                </Link>
                 <Link to="/register">
                   <Button className="bg-gradient-to-r from-pink-500 to-purple-600 text-white hover:from-pink-600 hover:to-purple-700">
                     Register Free
@@ -191,21 +195,21 @@ const Header = () => {
                     Browse Profiles
                   </Link>
                   <Link 
-                    to="/search" 
+                    to="/matches" 
                     className="hover:text-purple-200 transition-colors duration-200"
                     onClick={() => setIsMenuOpen(false)}
                   >
                     My Matches
                   </Link>
                   <Link 
-                    to="/search" 
+                    to="/interests" 
                     className="hover:text-purple-200 transition-colors duration-200"
                     onClick={() => setIsMenuOpen(false)}
                   >
                     Interests
                   </Link>
                   <Link 
-                    to="/search" 
+                    to="/messages" 
                     className="hover:text-purple-200 transition-colors duration-200"
                     onClick={() => setIsMenuOpen(false)}
                   >
@@ -245,9 +249,11 @@ const Header = () => {
                   </>
                 ) : (
                   <>
-                    <Button variant="ghost" className="text-white hover:bg-purple-800">
-                      Login
-                    </Button>
+                    <Link to="/login">
+                      <Button variant="ghost" className="text-white hover:bg-purple-800">
+                        Login
+                      </Button>
+                    </Link>
                     <Link to="/register">
                       <Button className="bg-gradient-to-r from-pink-500 to-purple-600 text-white hover:from-pink-600 hover:to-purple-700">
                         Register Free
