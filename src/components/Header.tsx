@@ -26,7 +26,7 @@ const Header = () => {
       <div className="container mx-auto px-4">
         <div className="flex items-center justify-between h-16">
           {/* Logo */}
-          <Link to="/" className="flex items-center space-x-2">
+          <Link to={isLoggedIn ? "/dashboard" : "/"} className="flex items-center space-x-2">
             <div className="w-10 h-10 bg-gradient-to-br from-pink-400 to-purple-500 rounded-full flex items-center justify-center">
               <Heart className="w-6 h-6 text-white" />
             </div>
@@ -38,42 +38,55 @@ const Header = () => {
 
           {/* Desktop Navigation */}
           <nav className="hidden md:flex items-center space-x-6">
-            <Link 
-              to="/search" 
-              className={`hover:text-purple-200 transition-colors duration-200 ${isActive('/search') ? 'text-purple-200' : ''}`}
-            >
-              Browse Profiles
-            </Link>
-            <Link 
-              to="/search" 
-              className={`hover:text-purple-200 transition-colors duration-200 ${isActive('/matches') ? 'text-purple-200' : ''}`}
-            >
-              My Matches
-            </Link>
-            <Link 
-              to="/search" 
-              className={`hover:text-purple-200 transition-colors duration-200 ${isActive('/interests') ? 'text-purple-200' : ''}`}
-            >
-              Interests
-            </Link>
-            <Link 
-              to="/search" 
-              className={`hover:text-purple-200 transition-colors duration-200 ${isActive('/messages') ? 'text-purple-200' : ''}`}
-            >
-              Messages
-            </Link>
-            <Link 
-              to="/search" 
-              className={`hover:text-purple-200 transition-colors duration-200 ${isActive('/search') ? 'text-purple-200' : ''}`}
-            >
-              Search
-            </Link>
-            <Link 
-              to="/" 
-              className={`hover:text-purple-200 transition-colors duration-200 ${isActive('/success-stories') ? 'text-purple-200' : ''}`}
-            >
-              Success Stories
-            </Link>
+            {isLoggedIn ? (
+              <>
+                <Link 
+                  to="/dashboard" 
+                  className={`hover:text-purple-200 transition-colors duration-200 ${isActive('/dashboard') ? 'text-purple-200' : ''}`}
+                >
+                  Dashboard
+                </Link>
+                <Link 
+                  to="/search" 
+                  className={`hover:text-purple-200 transition-colors duration-200 ${isActive('/search') ? 'text-purple-200' : ''}`}
+                >
+                  Browse Profiles
+                </Link>
+                <Link 
+                  to="/search" 
+                  className={`hover:text-purple-200 transition-colors duration-200 ${isActive('/matches') ? 'text-purple-200' : ''}`}
+                >
+                  My Matches
+                </Link>
+                <Link 
+                  to="/search" 
+                  className={`hover:text-purple-200 transition-colors duration-200 ${isActive('/interests') ? 'text-purple-200' : ''}`}
+                >
+                  Interests
+                </Link>
+                <Link 
+                  to="/search" 
+                  className={`hover:text-purple-200 transition-colors duration-200 ${isActive('/messages') ? 'text-purple-200' : ''}`}
+                >
+                  Messages
+                </Link>
+              </>
+            ) : (
+              <>
+                <Link 
+                  to="/search" 
+                  className={`hover:text-purple-200 transition-colors duration-200 ${isActive('/search') ? 'text-purple-200' : ''}`}
+                >
+                  Browse Profiles
+                </Link>
+                <Link 
+                  to="/" 
+                  className={`hover:text-purple-200 transition-colors duration-200 ${isActive('/success-stories') ? 'text-purple-200' : ''}`}
+                >
+                  Success Stories
+                </Link>
+              </>
+            )}
           </nav>
 
           {/* Desktop Actions */}
@@ -110,8 +123,10 @@ const Header = () => {
                   </DropdownMenuTrigger>
                   <DropdownMenuContent className="w-56 bg-white">
                     <DropdownMenuItem>
-                      <User className="mr-2 h-4 w-4" />
-                      <span>My Profile</span>
+                      <Link to="/profile" className="flex items-center w-full">
+                        <User className="mr-2 h-4 w-4" />
+                        <span>My Profile</span>
+                      </Link>
                     </DropdownMenuItem>
                     <DropdownMenuItem>
                       <Users className="mr-2 h-4 w-4" />
@@ -159,55 +174,71 @@ const Header = () => {
         {isMenuOpen && (
           <div className="md:hidden py-4 border-t border-purple-700">
             <nav className="flex flex-col space-y-3">
-              <Link 
-                to="/search" 
-                className="hover:text-purple-200 transition-colors duration-200"
-                onClick={() => setIsMenuOpen(false)}
-              >
-                Browse Profiles
-              </Link>
-              <Link 
-                to="/search" 
-                className="hover:text-purple-200 transition-colors duration-200"
-                onClick={() => setIsMenuOpen(false)}
-              >
-                My Matches
-              </Link>
-              <Link 
-                to="/search" 
-                className="hover:text-purple-200 transition-colors duration-200"
-                onClick={() => setIsMenuOpen(false)}
-              >
-                Interests
-              </Link>
-              <Link 
-                to="/search" 
-                className="hover:text-purple-200 transition-colors duration-200"
-                onClick={() => setIsMenuOpen(false)}
-              >
-                Messages
-              </Link>
-              <Link 
-                to="/search" 
-                className="hover:text-purple-200 transition-colors duration-200"
-                onClick={() => setIsMenuOpen(false)}
-              >
-                Search
-              </Link>
-              <Link 
-                to="/" 
-                className="hover:text-purple-200 transition-colors duration-200"
-                onClick={() => setIsMenuOpen(false)}
-              >
-                Success Stories
-              </Link>
+              {isLoggedIn ? (
+                <>
+                  <Link 
+                    to="/dashboard" 
+                    className="hover:text-purple-200 transition-colors duration-200"
+                    onClick={() => setIsMenuOpen(false)}
+                  >
+                    Dashboard
+                  </Link>
+                  <Link 
+                    to="/search" 
+                    className="hover:text-purple-200 transition-colors duration-200"
+                    onClick={() => setIsMenuOpen(false)}
+                  >
+                    Browse Profiles
+                  </Link>
+                  <Link 
+                    to="/search" 
+                    className="hover:text-purple-200 transition-colors duration-200"
+                    onClick={() => setIsMenuOpen(false)}
+                  >
+                    My Matches
+                  </Link>
+                  <Link 
+                    to="/search" 
+                    className="hover:text-purple-200 transition-colors duration-200"
+                    onClick={() => setIsMenuOpen(false)}
+                  >
+                    Interests
+                  </Link>
+                  <Link 
+                    to="/search" 
+                    className="hover:text-purple-200 transition-colors duration-200"
+                    onClick={() => setIsMenuOpen(false)}
+                  >
+                    Messages
+                  </Link>
+                </>
+              ) : (
+                <>
+                  <Link 
+                    to="/search" 
+                    className="hover:text-purple-200 transition-colors duration-200"
+                    onClick={() => setIsMenuOpen(false)}
+                  >
+                    Browse Profiles
+                  </Link>
+                  <Link 
+                    to="/" 
+                    className="hover:text-purple-200 transition-colors duration-200"
+                    onClick={() => setIsMenuOpen(false)}
+                  >
+                    Success Stories
+                  </Link>
+                </>
+              )}
               <div className="flex items-center space-x-3 pt-3">
                 {isLoggedIn ? (
                   <>
-                    <Button variant="ghost" size="sm" className="text-white hover:bg-purple-800">
-                      <User className="w-4 h-4 mr-1" />
-                      Profile
-                    </Button>
+                    <Link to="/profile">
+                      <Button variant="ghost" size="sm" className="text-white hover:bg-purple-800">
+                        <User className="w-4 h-4 mr-1" />
+                        Profile
+                      </Button>
+                    </Link>
                     <Button className="bg-gradient-to-r from-pink-500 to-purple-600 text-white hover:from-pink-600 hover:to-purple-700 text-sm">
                       Upgrade Plan
                     </Button>
