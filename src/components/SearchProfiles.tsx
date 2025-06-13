@@ -131,7 +131,6 @@ const SearchProfiles = () => {
       </div>
 
       <div className="grid lg:grid-cols-4 gap-6">
-        {/* Filters Sidebar */}
         <div className="lg:col-span-1">
           <Card className="sticky top-4">
             <CardHeader>
@@ -142,7 +141,6 @@ const SearchProfiles = () => {
               <CardDescription>Refine your search criteria</CardDescription>
             </CardHeader>
             <CardContent className="space-y-4">
-              {/* Age Range */}
               <div>
                 <Label className="text-sm font-medium mb-2 block">Age Range</Label>
                 <div className="grid grid-cols-2 gap-2">
@@ -161,7 +159,6 @@ const SearchProfiles = () => {
                 </div>
               </div>
 
-              {/* Height Range */}
               <div>
                 <Label className="text-sm font-medium mb-2 block">Height Range</Label>
                 <div className="grid grid-cols-2 gap-2">
@@ -170,10 +167,10 @@ const SearchProfiles = () => {
                       <SelectValue placeholder="Min" />
                     </SelectTrigger>
                     <SelectContent>
-                      <SelectItem value="4'6\"">4'6"</SelectItem>
-                      <SelectItem value="5'0\"">5'0"</SelectItem>
-                      <SelectItem value="5'4\"">5'4"</SelectItem>
-                      <SelectItem value="5'8\"">5'8"</SelectItem>
+                      <SelectItem value="4ft6in">4'6"</SelectItem>
+                      <SelectItem value="5ft0in">5'0"</SelectItem>
+                      <SelectItem value="5ft4in">5'4"</SelectItem>
+                      <SelectItem value="5ft8in">5'8"</SelectItem>
                     </SelectContent>
                   </Select>
                   <Select value={searchFilters.maxHeight} onValueChange={(value) => updateFilter("maxHeight", value)}>
@@ -181,16 +178,15 @@ const SearchProfiles = () => {
                       <SelectValue placeholder="Max" />
                     </SelectTrigger>
                     <SelectContent>
-                      <SelectItem value="5'4\"">5'4"</SelectItem>
-                      <SelectItem value="5'8\"">5'8"</SelectItem>
-                      <SelectItem value="6'0\"">6'0"</SelectItem>
-                      <SelectItem value="6'4\"">6'4"</SelectItem>
+                      <SelectItem value="5ft4in">5'4"</SelectItem>
+                      <SelectItem value="5ft8in">5'8"</SelectItem>
+                      <SelectItem value="6ft0in">6'0"</SelectItem>
+                      <SelectItem value="6ft4in">6'4"</SelectItem>
                     </SelectContent>
                   </Select>
                 </div>
               </div>
 
-              {/* Religion */}
               <div>
                 <Label htmlFor="religion">Religion</Label>
                 <Select value={searchFilters.religion} onValueChange={(value) => updateFilter("religion", value)}>
@@ -208,7 +204,6 @@ const SearchProfiles = () => {
                 </Select>
               </div>
 
-              {/* Caste */}
               <div>
                 <Label htmlFor="caste">Caste</Label>
                 <Input
@@ -218,7 +213,6 @@ const SearchProfiles = () => {
                 />
               </div>
 
-              {/* Education */}
               <div>
                 <Label htmlFor="education">Education</Label>
                 <Select value={searchFilters.education} onValueChange={(value) => updateFilter("education", value)}>
@@ -235,7 +229,6 @@ const SearchProfiles = () => {
                 </Select>
               </div>
 
-              {/* Occupation */}
               <div>
                 <Label htmlFor="occupation">Occupation</Label>
                 <Input
@@ -245,7 +238,6 @@ const SearchProfiles = () => {
                 />
               </div>
 
-              {/* Location */}
               <div>
                 <Label htmlFor="location">Location</Label>
                 <Input
@@ -255,7 +247,6 @@ const SearchProfiles = () => {
                 />
               </div>
 
-              {/* Income */}
               <div>
                 <Label htmlFor="income">Annual Income</Label>
                 <Select value={searchFilters.income} onValueChange={(value) => updateFilter("income", value)}>
@@ -272,7 +263,6 @@ const SearchProfiles = () => {
                 </Select>
               </div>
 
-              {/* Marital Status */}
               <div>
                 <Label htmlFor="maritalStatus">Marital Status</Label>
                 <Select value={searchFilters.maritalStatus} onValueChange={(value) => updateFilter("maritalStatus", value)}>
@@ -287,7 +277,6 @@ const SearchProfiles = () => {
                 </Select>
               </div>
 
-              {/* Manglik */}
               <div>
                 <Label htmlFor="manglik">Manglik Status</Label>
                 <Select value={searchFilters.manglik} onValueChange={(value) => updateFilter("manglik", value)}>
@@ -302,7 +291,6 @@ const SearchProfiles = () => {
                 </Select>
               </div>
 
-              {/* Diet */}
               <div>
                 <Label htmlFor="diet">Dietary Habits</Label>
                 <Select value={searchFilters.diet} onValueChange={(value) => updateFilter("diet", value)}>
@@ -330,7 +318,6 @@ const SearchProfiles = () => {
           </Card>
         </div>
 
-        {/* Search Results */}
         <div className="lg:col-span-3">
           <div className="mb-6">
             <div className="flex justify-between items-center">
