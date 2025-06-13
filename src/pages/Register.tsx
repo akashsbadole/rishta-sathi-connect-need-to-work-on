@@ -1,8 +1,13 @@
 
+import Layout from "@/components/Layout";
 import RegistrationWizard from "@/components/RegistrationWizard";
 
 const RegisterPage = () => {
-  return <RegistrationWizard />;
+  return (
+    <Layout>
+      <RegistrationWizard />
+    </Layout>
+  );
 };
 
 export default RegisterPage;

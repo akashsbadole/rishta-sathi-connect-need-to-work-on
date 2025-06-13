@@ -1,33 +1,34 @@
 
 import { Heart, Phone, Mail, MapPin, Facebook, Instagram, Youtube } from "lucide-react";
 import { Separator } from "@/components/ui/separator";
+import { Link } from "react-router-dom";
 
 const Footer = () => {
   const quickLinks = [
-    "Browse Profiles",
-    "Search by City",
-    "Search by Community",
-    "Success Stories",
-    "Mobile App",
-    "Help Center"
+    { name: "Browse Profiles", url: "/browse-profiles" },
+    { name: "Search by City", url: "/search" },
+    { name: "Search by Community", url: "/search" },
+    { name: "Success Stories", url: "/success-stories" },
+    { name: "Mobile App", url: "#" },
+    { name: "Help Center", url: "/contact-us" }
   ];
 
   const matrimonyServices = [
-    "Wedding Photography",
-    "Wedding Planning",
-    "Astrology Services",
-    "Wedding Venues",
-    "Bridal Makeup",
-    "Wedding Cards"
+    { name: "Wedding Photography", url: "/wedding-services" },
+    { name: "Wedding Planning", url: "/wedding-services" },
+    { name: "Astrology Services", url: "/wedding-services" },
+    { name: "Wedding Venues", url: "/wedding-services" },
+    { name: "Bridal Makeup", url: "/wedding-services" },
+    { name: "Wedding Cards", url: "/wedding-services" }
   ];
 
   const supportLinks = [
-    "Customer Care",
-    "Contact Us",
-    "Premium Plans",
-    "Safety Tips",
-    "Terms of Service",
-    "Privacy Policy"
+    { name: "Customer Care", url: "/contact-us" },
+    { name: "Contact Us", url: "/contact-us" },
+    { name: "Premium Plans", url: "/premium" },
+    { name: "Safety Tips", url: "/safety-tips" },
+    { name: "Terms of Service", url: "/terms-of-service" },
+    { name: "Privacy Policy", url: "/privacy-policy" }
   ];
 
   return (
@@ -71,12 +72,12 @@ const Footer = () => {
             <ul className="space-y-3">
               {quickLinks.map((link, index) => (
                 <li key={index}>
-                  <a 
-                    href="#" 
+                  <Link 
+                    to={link.url} 
                     className="text-gray-300 hover:text-rose-400 transition-colors duration-200 text-sm"
                   >
-                    {link}
-                  </a>
+                    {link.name}
+                  </Link>
                 </li>
               ))}
             </ul>
@@ -88,12 +89,12 @@ const Footer = () => {
             <ul className="space-y-3">
               {matrimonyServices.map((service, index) => (
                 <li key={index}>
-                  <a 
-                    href="#" 
+                  <Link 
+                    to={service.url} 
                     className="text-gray-300 hover:text-rose-400 transition-colors duration-200 text-sm"
                   >
-                    {service}
-                  </a>
+                    {service.name}
+                  </Link>
                 </li>
               ))}
             </ul>
@@ -105,12 +106,12 @@ const Footer = () => {
             <ul className="space-y-3">
               {supportLinks.map((link, index) => (
                 <li key={index}>
-                  <a 
-                    href="#" 
+                  <Link 
+                    to={link.url} 
                     className="text-gray-300 hover:text-rose-400 transition-colors duration-200 text-sm"
                   >
-                    {link}
-                  </a>
+                    {link.name}
+                  </Link>
                 </li>
               ))}
             </ul>

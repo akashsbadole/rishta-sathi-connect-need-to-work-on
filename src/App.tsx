@@ -17,6 +17,12 @@ import BackgroundVerification from "./pages/BackgroundVerification";
 import WeddingServices from "./pages/WeddingServices";
 import AIMatching from "./pages/AIMatching";
 import PremiumFeatures from "./pages/PremiumFeatures";
+import BrowseProfilesPage from "./pages/BrowseProfiles";
+import SuccessStoriesPage from "./pages/SuccessStories";
+import ContactUsPage from "./pages/ContactUs";
+import PrivacyPolicyPage from "./pages/PrivacyPolicy";
+import TermsOfServicePage from "./pages/TermsOfService";
+import SafetyTipsPage from "./pages/SafetyTips";
 import NotFound from "./pages/NotFound";
 
 const queryClient = new QueryClient();
@@ -32,6 +38,12 @@ const App = () => (
           <Route path="/login" element={<Login />} />
           <Route path="/register" element={<Register />} />
           <Route path="/search" element={<Search />} />
+          <Route path="/browse-profiles" element={<BrowseProfilesPage />} />
+          <Route path="/success-stories" element={<SuccessStoriesPage />} />
+          <Route path="/contact-us" element={<ContactUsPage />} />
+          <Route path="/privacy-policy" element={<PrivacyPolicyPage />} />
+          <Route path="/terms-of-service" element={<TermsOfServicePage />} />
+          <Route path="/safety-tips" element={<SafetyTipsPage />} />
           <Route path="/dashboard" element={<Dashboard />} />
           <Route path="/profile" element={<Profile />} />
           <Route path="/messages" element={<Messages />} />
