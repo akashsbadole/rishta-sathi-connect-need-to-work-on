@@ -1,8 +1,8 @@
 
 import ProfileManagement from "@/components/ProfileManagement";
 
-const Profile = () => {
+const ProfilePage = () => {
   return <ProfileManagement />;
 };
 
-export default Profile;
+export default ProfilePage;

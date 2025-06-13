@@ -1,8 +1,8 @@
 
-import Registration from "@/components/Registration";
+import RegistrationWizard from "@/components/RegistrationWizard";
 
-const Register = () => {
-  return <Registration />;
+const RegisterPage = () => {
+  return <RegistrationWizard />;
 };
 
-export default Register;
+export default RegisterPage;

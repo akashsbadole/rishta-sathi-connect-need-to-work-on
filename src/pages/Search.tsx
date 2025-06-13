@@ -1,8 +1,8 @@
 
 import SearchProfiles from "@/components/SearchProfiles";
 
-const Search = () => {
+const SearchPage = () => {
   return <SearchProfiles />;
 };
 
-export default Search;
+export default SearchPage;

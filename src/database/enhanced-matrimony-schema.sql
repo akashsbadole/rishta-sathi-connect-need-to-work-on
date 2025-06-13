@@ -66,6 +66,88 @@ CREATE TABLE personal_details (
   updated_at TIMESTAMP DEFAULT NOW()
 );
 
+-- Location Details
+CREATE TABLE location_details (
+  id UUID PRIMARY KEY DEFAULT gen_random_uuid(),
+  user_id UUID REFERENCES users(id) ON DELETE CASCADE,
+  current_address TEXT NOT NULL,
+  current_city VARCHAR(100) NOT NULL,
+  current_state VARCHAR(100) NOT NULL,
+  current_country VARCHAR(100) DEFAULT 'India',
+  current_pincode VARCHAR(10),
+  permanent_address TEXT,
+  permanent_city VARCHAR(100),
+  permanent_state VARCHAR(100),
+  permanent_country VARCHAR(100) DEFAULT 'India',
+  permanent_pincode VARCHAR(10),
+  coordinates POINT,
+  landmark VARCHAR(200),
+  area_type VARCHAR(50),
+  residence_type VARCHAR(50),
+  residence_ownership VARCHAR(50),
+  willing_to_relocate BOOLEAN DEFAULT false,
+  preferred_locations TEXT[],
+  created_at TIMESTAMP DEFAULT NOW()
+);
+
+-- Educational Details
+CREATE TABLE education_details (
+  id UUID PRIMARY KEY DEFAULT gen_random_uuid(),
+  user_id UUID REFERENCES users(id) ON DELETE CASCADE,
+  education_level VARCHAR(100) NOT NULL,
+  degree_name VARCHAR(200),
+  college_university VARCHAR(200),
+  specialization VARCHAR(200),
+  graduation_year INTEGER,
+  grades_percentage DECIMAL(5,2),
+  additional_qualifications TEXT[],
+  certifications TEXT[],
+  research_work TEXT,
+  publications TEXT[],
+  awards TEXT[],
+  extracurricular_activities TEXT[],
+  created_at TIMESTAMP DEFAULT NOW()
+);
+
+-- Professional Details
+CREATE TABLE professional_details (
+  id UUID PRIMARY KEY DEFAULT gen_random_uuid(),
+  user_id UUID REFERENCES users(id) ON DELETE CASCADE,
+  occupation VARCHAR(200) NOT NULL,
+  company_name VARCHAR(200),
+  job_title VARCHAR(200),
+  industry VARCHAR(100),
+  experience_years INTEGER,
+  annual_income DECIMAL(15,2),
+  income_currency VARCHAR(10) DEFAULT 'INR',
+  work_location VARCHAR(200),
+  business_nature VARCHAR(100),
+  achievements TEXT[],
+  future_plans TEXT,
+  is_business_owner BOOLEAN DEFAULT false,
+  business_details TEXT,
+  work_abroad_willingness BOOLEAN DEFAULT false,
+  created_at TIMESTAMP DEFAULT NOW()
+);
+
+-- Religious and Cultural Details
+CREATE TABLE religious_details (
+  id UUID PRIMARY KEY DEFAULT gen_random_uuid(),
+  user_id UUID REFERENCES users(id) ON DELETE CASCADE,
+  religion VARCHAR(50) NOT NULL,
+  caste VARCHAR(100),
+  sub_caste VARCHAR(100),
+  gotra VARCHAR(100),
+  manglik_status VARCHAR(20),
+  religious_practices VARCHAR(50),
+  dietary_habits VARCHAR(30),
+  smoking_habits VARCHAR(20),
+  drinking_habits VARCHAR(20),
+  cultural_values TEXT,
+  festival_celebrations TEXT[],
+  created_at TIMESTAMP DEFAULT NOW()
+);
+
 -- Advanced Background Verification
 CREATE TABLE background_verification (
   id UUID PRIMARY KEY DEFAULT gen_random_uuid(),
@@ -85,42 +167,6 @@ CREATE TABLE background_verification (
   verification_notes TEXT,
   verified_at TIMESTAMP,
   expires_at TIMESTAMP,
-  created_at TIMESTAMP DEFAULT NOW()
-);
-
--- Wedding Services Integration
-CREATE TABLE wedding_services (
-  id UUID PRIMARY KEY DEFAULT gen_random_uuid(),
-  service_name VARCHAR(200) NOT NULL,
-  service_category VARCHAR(50),
-  vendor_id UUID,
-  description TEXT,
-  price_range VARCHAR(50),
-  location VARCHAR(200),
-  rating DECIMAL(3,2),
-  reviews_count INTEGER DEFAULT 0,
-  availability_status VARCHAR(20) DEFAULT 'available',
-  photos TEXT[],
-  contact_details JSONB,
-  verification_status VARCHAR(20) DEFAULT 'pending',
-  commission_rate DECIMAL(5,2),
-  created_at TIMESTAMP DEFAULT NOW()
-);
-
--- Wedding Planning
-CREATE TABLE wedding_bookings (
-  id UUID PRIMARY KEY DEFAULT gen_random_uuid(),
-  user_id UUID REFERENCES users(id) ON DELETE CASCADE,
-  partner_user_id UUID REFERENCES users(id),
-  service_id UUID REFERENCES wedding_services(id),
-  booking_date DATE,
-  event_date DATE,
-  total_amount DECIMAL(12,2),
-  advance_paid DECIMAL(12,2),
-  booking_status VARCHAR(20) DEFAULT 'pending',
-  special_requirements TEXT,
-  vendor_notes TEXT,
-  commission_amount DECIMAL(10,2),
   created_at TIMESTAMP DEFAULT NOW()
 );
 
@@ -152,6 +198,36 @@ CREATE TABLE family_details (
   native_place VARCHAR(100),
   ancestral_origin VARCHAR(100),
   family_reputation_score INTEGER,
+  created_at TIMESTAMP DEFAULT NOW(),
+  updated_at TIMESTAMP DEFAULT NOW()
+);
+
+-- Partner Preferences
+CREATE TABLE partner_preferences (
+  id UUID PRIMARY KEY DEFAULT gen_random_uuid(),
+  user_id UUID REFERENCES users(id) ON DELETE CASCADE,
+  min_age INTEGER,
+  max_age INTEGER,
+  min_height_cm INTEGER,
+  max_height_cm INTEGER,
+  education_levels TEXT[],
+  occupations TEXT[],
+  min_income DECIMAL(15,2),
+  max_income DECIMAL(15,2),
+  religions TEXT[],
+  castes TEXT[],
+  marital_statuses TEXT[],
+  locations TEXT[],
+  complexions TEXT[],
+  body_types TEXT[],
+  dietary_preferences TEXT[],
+  smoking_preference VARCHAR(20),
+  drinking_preference VARCHAR(20),
+  manglik_preference VARCHAR(20),
+  family_types TEXT[],
+  mother_tongue_preferences TEXT[],
+  special_requirements TEXT,
+  deal_breakers TEXT,
   created_at TIMESTAMP DEFAULT NOW(),
   updated_at TIMESTAMP DEFAULT NOW()
 );
@@ -208,6 +284,56 @@ CREATE TABLE messages (
   reply_to_message_id UUID REFERENCES messages(id),
   is_deleted BOOLEAN DEFAULT false,
   auto_delete_at TIMESTAMP
+);
+
+-- Interest/Connection Management
+CREATE TABLE interests (
+  id UUID PRIMARY KEY DEFAULT gen_random_uuid(),
+  sender_id UUID REFERENCES users(id) ON DELETE CASCADE,
+  receiver_id UUID REFERENCES users(id) ON DELETE CASCADE,
+  interest_type VARCHAR(20) DEFAULT 'express_interest',
+  status VARCHAR(20) DEFAULT 'pending', -- pending, accepted, declined, expired
+  message TEXT,
+  sent_at TIMESTAMP DEFAULT NOW(),
+  responded_at TIMESTAMP,
+  expires_at TIMESTAMP DEFAULT (NOW() + INTERVAL '30 days'),
+  is_mutual BOOLEAN DEFAULT false
+);
+
+-- Wedding Services Integration
+CREATE TABLE wedding_services (
+  id UUID PRIMARY KEY DEFAULT gen_random_uuid(),
+  service_name VARCHAR(200) NOT NULL,
+  service_category VARCHAR(50),
+  vendor_id UUID,
+  description TEXT,
+  price_range VARCHAR(50),
+  location VARCHAR(200),
+  rating DECIMAL(3,2),
+  reviews_count INTEGER DEFAULT 0,
+  availability_status VARCHAR(20) DEFAULT 'available',
+  photos TEXT[],
+  contact_details JSONB,
+  verification_status VARCHAR(20) DEFAULT 'pending',
+  commission_rate DECIMAL(5,2),
+  created_at TIMESTAMP DEFAULT NOW()
+);
+
+-- Wedding Planning
+CREATE TABLE wedding_bookings (
+  id UUID PRIMARY KEY DEFAULT gen_random_uuid(),
+  user_id UUID REFERENCES users(id) ON DELETE CASCADE,
+  partner_user_id UUID REFERENCES users(id),
+  service_id UUID REFERENCES wedding_services(id),
+  booking_date DATE,
+  event_date DATE,
+  total_amount DECIMAL(12,2),
+  advance_paid DECIMAL(12,2),
+  booking_status VARCHAR(20) DEFAULT 'pending',
+  special_requirements TEXT,
+  vendor_notes TEXT,
+  commission_amount DECIMAL(10,2),
+  created_at TIMESTAMP DEFAULT NOW()
 );
 
 -- Premium Subscription Management
@@ -320,6 +446,16 @@ CREATE TABLE vendors (
   created_at TIMESTAMP DEFAULT NOW()
 );
 
+-- Profile Views Tracking
+CREATE TABLE profile_views (
+  id UUID PRIMARY KEY DEFAULT gen_random_uuid(),
+  viewer_id UUID REFERENCES users(id) ON DELETE CASCADE,
+  viewed_id UUID REFERENCES users(id) ON DELETE CASCADE,
+  view_date TIMESTAMP DEFAULT NOW(),
+  view_duration INTEGER, -- in seconds
+  view_source VARCHAR(50) -- search, recommendation, profile_browse
+);
+
 -- Indexes for Performance Optimization
 CREATE INDEX idx_users_subscription_verification ON users(subscription_type, verification_tier);
 CREATE INDEX idx_ai_compatibility_scores ON ai_compatibility_scores(user1_id, user2_id, overall_compatibility_score);
@@ -328,6 +464,8 @@ CREATE INDEX idx_messages_conversation_date ON messages(conversation_id, sent_at
 CREATE INDEX idx_wedding_services_category_location ON wedding_services(service_category, location);
 CREATE INDEX idx_user_analytics_user_event ON user_analytics(user_id, event_type, timestamp);
 CREATE INDEX idx_background_verification_user_tier ON background_verification(user_id, verification_tier);
+CREATE INDEX idx_interests_sender_receiver ON interests(sender_id, receiver_id, status);
+CREATE INDEX idx_profile_views_viewed_date ON profile_views(viewed_id, view_date);
 
 -- Views for Complex Queries
 CREATE VIEW enhanced_user_profiles AS
@@ -341,12 +479,12 @@ SELECT
   pd.age,
   pd.gender,
   pd.height_cm,
-  pd.education_level,
-  pd.occupation,
+  ed.education_level,
+  prof.occupation,
   fd.family_type,
   fd.family_values,
-  ld.city,
-  ld.state,
+  ld.current_city,
+  ld.current_state,
   rd.religion,
   rd.caste,
   acs.overall_compatibility_score,
@@ -357,6 +495,8 @@ LEFT JOIN personal_details pd ON u.id = pd.user_id
 LEFT JOIN family_details fd ON u.id = fd.user_id
 LEFT JOIN location_details ld ON u.id = ld.user_id
 LEFT JOIN religious_details rd ON u.id = rd.user_id
+LEFT JOIN education_details ed ON u.id = ed.user_id
+LEFT JOIN professional_details prof ON u.id = prof.user_id
 LEFT JOIN ai_compatibility_scores acs ON u.id = acs.user1_id
 LEFT JOIN background_verification bv ON u.id = bv.user_id
 WHERE u.is_active = true;
