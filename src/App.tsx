@@ -13,6 +13,10 @@ import Profile from "./pages/Profile";
 import Messages from "./pages/Messages";
 import Interests from "./pages/Interests";
 import Matches from "./pages/Matches";
+import BackgroundVerification from "./pages/BackgroundVerification";
+import WeddingServices from "./pages/WeddingServices";
+import AIMatching from "./pages/AIMatching";
+import PremiumFeatures from "./pages/PremiumFeatures";
 import NotFound from "./pages/NotFound";
 
 const queryClient = new QueryClient();
@@ -33,6 +37,10 @@ const App = () => (
           <Route path="/messages" element={<Messages />} />
           <Route path="/interests" element={<Interests />} />
           <Route path="/matches" element={<Matches />} />
+          <Route path="/ai-matching" element={<AIMatching />} />
+          <Route path="/background-verification" element={<BackgroundVerification />} />
+          <Route path="/wedding-services" element={<WeddingServices />} />
+          <Route path="/premium" element={<PremiumFeatures />} />
           {/* ADD ALL CUSTOM ROUTES ABOVE THE CATCH-ALL "*" ROUTE */}
           <Route path="*" element={<NotFound />} />
         </Routes>
