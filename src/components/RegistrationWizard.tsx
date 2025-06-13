@@ -463,7 +463,7 @@ const RegistrationWizard = () => {
 
             <h3 className="text-lg font-semibold">Permanent Address</h3>
             <div>
-              <Label htmlFor="permanentAddress">Address</Label>
+              <Label htmlFor="permanentAddress">Permanent Address</Label>
               <Textarea
                 id="permanentAddress"
                 value={formData.permanentAddress}
@@ -502,15 +502,6 @@ const RegistrationWizard = () => {
                 />
               </div>
             </div>
-
-            <div className="flex items-center space-x-2">
-              <Checkbox
-                id="willingToRelocate"
-                checked={formData.willingToRelocate}
-                onCheckedChange={(checked) => updateFormData("willingToRelocate", checked)}
-              />
-              <Label htmlFor="willingToRelocate">Willing to relocate after marriage</Label>
-            </div>
           </div>
         );
 
@@ -531,9 +522,6 @@ const RegistrationWizard = () => {
                     <SelectItem value="sikh">Sikh</SelectItem>
                     <SelectItem value="buddhist">Buddhist</SelectItem>
                     <SelectItem value="jain">Jain</SelectItem>
-                    <SelectItem value="parsi">Parsi</SelectItem>
-                    <SelectItem value="jewish">Jewish</SelectItem>
-                    <SelectItem value="other">Other</SelectItem>
                   </SelectContent>
                 </Select>
               </div>
@@ -565,8 +553,8 @@ const RegistrationWizard = () => {
                     <SelectValue placeholder="Select manglik status" />
                   </SelectTrigger>
                   <SelectContent>
-                    <SelectItem value="yes">Manglik</SelectItem>
-                    <SelectItem value="no">Non-Manglik</SelectItem>
+                    <SelectItem value="yes">Yes</SelectItem>
+                    <SelectItem value="no">No</SelectItem>
                     <SelectItem value="dont_know">Don't Know</SelectItem>
                   </SelectContent>
                 </Select>
@@ -578,14 +566,13 @@ const RegistrationWizard = () => {
                 <Label htmlFor="dietaryHabits">Dietary Habits</Label>
                 <Select value={formData.dietaryHabits} onValueChange={(value) => updateFormData("dietaryHabits", value)}>
                   <SelectTrigger>
-                    <SelectValue placeholder="Select dietary habits" />
+                    <SelectValue placeholder="Select diet" />
                   </SelectTrigger>
                   <SelectContent>
                     <SelectItem value="vegetarian">Vegetarian</SelectItem>
                     <SelectItem value="non_vegetarian">Non-Vegetarian</SelectItem>
-                    <SelectItem value="eggetarian">Eggetarian</SelectItem>
                     <SelectItem value="vegan">Vegan</SelectItem>
-                    <SelectItem value="jain_vegetarian">Jain Vegetarian</SelectItem>
+                    <SelectItem value="jain">Jain</SelectItem>
                   </SelectContent>
                 </Select>
               </div>
@@ -593,13 +580,12 @@ const RegistrationWizard = () => {
                 <Label htmlFor="smokingHabits">Smoking Habits</Label>
                 <Select value={formData.smokingHabits} onValueChange={(value) => updateFormData("smokingHabits", value)}>
                   <SelectTrigger>
-                    <SelectValue placeholder="Select smoking habits" />
+                    <SelectValue placeholder="Select smoking habit" />
                   </SelectTrigger>
                   <SelectContent>
                     <SelectItem value="never">Never</SelectItem>
                     <SelectItem value="occasionally">Occasionally</SelectItem>
                     <SelectItem value="regularly">Regularly</SelectItem>
-                    <SelectItem value="planning_to_quit">Planning to Quit</SelectItem>
                   </SelectContent>
                 </Select>
               </div>
@@ -607,12 +593,11 @@ const RegistrationWizard = () => {
                 <Label htmlFor="drinkingHabits">Drinking Habits</Label>
                 <Select value={formData.drinkingHabits} onValueChange={(value) => updateFormData("drinkingHabits", value)}>
                   <SelectTrigger>
-                    <SelectValue placeholder="Select drinking habits" />
+                    <SelectValue placeholder="Select drinking habit" />
                   </SelectTrigger>
                   <SelectContent>
                     <SelectItem value="never">Never</SelectItem>
                     <SelectItem value="occasionally">Occasionally</SelectItem>
-                    <SelectItem value="socially">Socially</SelectItem>
                     <SelectItem value="regularly">Regularly</SelectItem>
                   </SelectContent>
                 </Select>
@@ -636,8 +621,7 @@ const RegistrationWizard = () => {
                     <SelectItem value="diploma">Diploma</SelectItem>
                     <SelectItem value="bachelors">Bachelor's Degree</SelectItem>
                     <SelectItem value="masters">Master's Degree</SelectItem>
-                    <SelectItem value="phd">PhD</SelectItem>
-                    <SelectItem value="professional">Professional Degree</SelectItem>
+                    <SelectItem value="doctorate">Doctorate</SelectItem>
                   </SelectContent>
                 </Select>
               </div>
@@ -647,7 +631,7 @@ const RegistrationWizard = () => {
                   id="degreeName"
                   value={formData.degreeName}
                   onChange={(e) => updateFormData("degreeName", e.target.value)}
-                  placeholder="e.g., B.Tech, MBA, MBBS"
+                  placeholder="Enter degree name"
                 />
               </div>
             </div>
@@ -668,7 +652,7 @@ const RegistrationWizard = () => {
                   id="specialization"
                   value={formData.specialization}
                   onChange={(e) => updateFormData("specialization", e.target.value)}
-                  placeholder="e.g., Computer Science, Finance"
+                  placeholder="Enter specialization"
                 />
               </div>
             </div>
@@ -681,7 +665,7 @@ const RegistrationWizard = () => {
                   type="number"
                   value={formData.graduationYear}
                   onChange={(e) => updateFormData("graduationYear", e.target.value)}
-                  placeholder="e.g., 2020"
+                  placeholder="Enter graduation year"
                 />
               </div>
               <div>
@@ -690,7 +674,7 @@ const RegistrationWizard = () => {
                   id="gradesPercentage"
                   value={formData.gradesPercentage}
                   onChange={(e) => updateFormData("gradesPercentage", e.target.value)}
-                  placeholder="e.g., 85%, 8.5 CGPA"
+                  placeholder="Enter grades/percentage"
                 />
               </div>
             </div>
@@ -703,12 +687,18 @@ const RegistrationWizard = () => {
             <div className="grid md:grid-cols-2 gap-4">
               <div>
                 <Label htmlFor="occupation">Occupation *</Label>
-                <Input
-                  id="occupation"
-                  value={formData.occupation}
-                  onChange={(e) => updateFormData("occupation", e.target.value)}
-                  placeholder="e.g., Software Engineer, Doctor"
-                />
+                <Select value={formData.occupation} onValueChange={(value) => updateFormData("occupation", value)}>
+                  <SelectTrigger>
+                    <SelectValue placeholder="Select occupation" />
+                  </SelectTrigger>
+                  <SelectContent>
+                    <SelectItem value="software_engineer">Software Engineer</SelectItem>
+                    <SelectItem value="doctor">Doctor</SelectItem>
+                    <SelectItem value="teacher">Teacher</SelectItem>
+                    <SelectItem value="business">Business</SelectItem>
+                    <SelectItem value="government_job">Government Job</SelectItem>
+                  </SelectContent>
+                </Select>
               </div>
               <div>
                 <Label htmlFor="companyName">Company Name</Label>
@@ -728,30 +718,21 @@ const RegistrationWizard = () => {
                   id="jobTitle"
                   value={formData.jobTitle}
                   onChange={(e) => updateFormData("jobTitle", e.target.value)}
-                  placeholder="e.g., Senior Software Developer"
+                  placeholder="Enter job title"
                 />
               </div>
               <div>
                 <Label htmlFor="industry">Industry</Label>
-                <Select value={formData.industry} onValueChange={(value) => updateFormData("industry", value)}>
-                  <SelectTrigger>
-                    <SelectValue placeholder="Select industry" />
-                  </SelectTrigger>
-                  <SelectContent>
-                    <SelectItem value="it">Information Technology</SelectItem>
-                    <SelectItem value="healthcare">Healthcare</SelectItem>
-                    <SelectItem value="finance">Finance</SelectItem>
-                    <SelectItem value="education">Education</SelectItem>
-                    <SelectItem value="manufacturing">Manufacturing</SelectItem>
-                    <SelectItem value="retail">Retail</SelectItem>
-                    <SelectItem value="government">Government</SelectItem>
-                    <SelectItem value="other">Other</SelectItem>
-                  </SelectContent>
-                </Select>
+                <Input
+                  id="industry"
+                  value={formData.industry}
+                  onChange={(e) => updateFormData("industry", e.target.value)}
+                  placeholder="Enter industry"
+                />
               </div>
             </div>
 
-            <div className="grid md:grid-cols-3 gap-4">
+            <div className="grid md:grid-cols-2 gap-4">
               <div>
                 <Label htmlFor="experienceYears">Experience (Years)</Label>
                 <Input
@@ -759,37 +740,34 @@ const RegistrationWizard = () => {
                   type="number"
                   value={formData.experienceYears}
                   onChange={(e) => updateFormData("experienceYears", e.target.value)}
-                  placeholder="e.g., 5"
+                  placeholder="Enter years of experience"
                 />
               </div>
               <div>
-                <Label htmlFor="annualIncome">Annual Income (₹)</Label>
-                <Input
-                  id="annualIncome"
-                  type="number"
-                  value={formData.annualIncome}
-                  onChange={(e) => updateFormData("annualIncome", e.target.value)}
-                  placeholder="e.g., 1200000"
-                />
-              </div>
-              <div>
-                <Label htmlFor="workLocation">Work Location</Label>
-                <Input
-                  id="workLocation"
-                  value={formData.workLocation}
-                  onChange={(e) => updateFormData("workLocation", e.target.value)}
-                  placeholder="e.g., Mumbai, Bangalore"
-                />
+                <Label htmlFor="annualIncome">Annual Income</Label>
+                <Select value={formData.annualIncome} onValueChange={(value) => updateFormData("annualIncome", value)}>
+                  <SelectTrigger>
+                    <SelectValue placeholder="Select income range" />
+                  </SelectTrigger>
+                  <SelectContent>
+                    <SelectItem value="below_5">Below ₹5 Lakhs</SelectItem>
+                    <SelectItem value="5_10">₹5-10 Lakhs</SelectItem>
+                    <SelectItem value="10_20">₹10-20 Lakhs</SelectItem>
+                    <SelectItem value="20_50">₹20-50 Lakhs</SelectItem>
+                    <SelectItem value="above_50">Above ₹50 Lakhs</SelectItem>
+                  </SelectContent>
+                </Select>
               </div>
             </div>
 
-            <div className="flex items-center space-x-2">
-              <Checkbox
-                id="isBusinessOwner"
-                checked={formData.isBusinessOwner}
-                onCheckedChange={(checked) => updateFormData("isBusinessOwner", checked)}
+            <div>
+              <Label htmlFor="workLocation">Work Location</Label>
+              <Input
+                id="workLocation"
+                value={formData.workLocation}
+                onChange={(e) => updateFormData("workLocation", e.target.value)}
+                placeholder="Enter work location"
               />
-              <Label htmlFor="isBusinessOwner">I own a business</Label>
             </div>
           </div>
         );
@@ -805,8 +783,9 @@ const RegistrationWizard = () => {
                     <SelectValue placeholder="Select family type" />
                   </SelectTrigger>
                   <SelectContent>
-                    <SelectItem value="nuclear">Nuclear Family</SelectItem>
-                    <SelectItem value="joint">Joint Family</SelectItem>
+                    <SelectItem value="nuclear">Nuclear</SelectItem>
+                    <SelectItem value="joint">Joint</SelectItem>
+                    <SelectItem value="extended">Extended</SelectItem>
                   </SelectContent>
                 </Select>
               </div>
@@ -817,6 +796,7 @@ const RegistrationWizard = () => {
                     <SelectValue placeholder="Select family values" />
                   </SelectTrigger>
                   <SelectContent>
+                    <SelectItem value="orthodox">Orthodox</SelectItem>
                     <SelectItem value="traditional">Traditional</SelectItem>
                     <SelectItem value="moderate">Moderate</SelectItem>
                     <SelectItem value="liberal">Liberal</SelectItem>
@@ -825,8 +805,7 @@ const RegistrationWizard = () => {
               </div>
             </div>
 
-            <h3 className="text-lg font-semibold">Father's Details</h3>
-            <div className="grid md:grid-cols-3 gap-4">
+            <div className="grid md:grid-cols-2 gap-4">
               <div>
                 <Label htmlFor="fatherName">Father's Name</Label>
                 <Input
@@ -845,25 +824,9 @@ const RegistrationWizard = () => {
                   placeholder="Enter father's occupation"
                 />
               </div>
-              <div>
-                <Label htmlFor="fatherIncome">Father's Income Range</Label>
-                <Select value={formData.fatherIncome} onValueChange={(value) => updateFormData("fatherIncome", value)}>
-                  <SelectTrigger>
-                    <SelectValue placeholder="Select income range" />
-                  </SelectTrigger>
-                  <SelectContent>
-                    <SelectItem value="below_5">Below ₹5 Lakhs</SelectItem>
-                    <SelectItem value="5_10">₹5-10 Lakhs</SelectItem>
-                    <SelectItem value="10_20">₹10-20 Lakhs</SelectItem>
-                    <SelectItem value="20_50">₹20-50 Lakhs</SelectItem>
-                    <SelectItem value="above_50">Above ₹50 Lakhs</SelectItem>
-                  </SelectContent>
-                </Select>
-              </div>
             </div>
 
-            <h3 className="text-lg font-semibold">Mother's Details</h3>
-            <div className="grid md:grid-cols-3 gap-4">
+            <div className="grid md:grid-cols-2 gap-4">
               <div>
                 <Label htmlFor="motherName">Mother's Name</Label>
                 <Input
@@ -882,24 +845,8 @@ const RegistrationWizard = () => {
                   placeholder="Enter mother's occupation"
                 />
               </div>
-              <div>
-                <Label htmlFor="motherIncome">Mother's Income Range</Label>
-                <Select value={formData.motherIncome} onValueChange={(value) => updateFormData("motherIncome", value)}>
-                  <SelectTrigger>
-                    <SelectValue placeholder="Select income range" />
-                  </SelectTrigger>
-                  <SelectContent>
-                    <SelectItem value="homemaker">Homemaker</SelectItem>
-                    <SelectItem value="below_5">Below ₹5 Lakhs</SelectItem>
-                    <SelectItem value="5_10">₹5-10 Lakhs</SelectItem>
-                    <SelectItem value="10_20">₹10-20 Lakhs</SelectItem>
-                    <SelectItem value="above_20">Above ₹20 Lakhs</SelectItem>
-                  </SelectContent>
-                </Select>
-              </div>
             </div>
 
-            <h3 className="text-lg font-semibold">Siblings</h3>
             <div className="grid md:grid-cols-4 gap-4">
               <div>
                 <Label htmlFor="brothersCount">Number of Brothers</Label>
@@ -942,17 +889,6 @@ const RegistrationWizard = () => {
                 />
               </div>
             </div>
-
-            <div>
-              <Label htmlFor="aboutFamily">About Family</Label>
-              <Textarea
-                id="aboutFamily"
-                value={formData.aboutFamily}
-                onChange={(e) => updateFormData("aboutFamily", e.target.value)}
-                placeholder="Write about your family background, values, and traditions..."
-                rows={4}
-              />
-            </div>
           </div>
         );
 
@@ -968,7 +904,7 @@ const RegistrationWizard = () => {
                   type="number"
                   value={formData.minAge}
                   onChange={(e) => updateFormData("minAge", e.target.value)}
-                  placeholder="e.g., 25"
+                  placeholder="Min age"
                 />
               </div>
               <div>
@@ -978,7 +914,7 @@ const RegistrationWizard = () => {
                   type="number"
                   value={formData.maxAge}
                   onChange={(e) => updateFormData("maxAge", e.target.value)}
-                  placeholder="e.g., 35"
+                  placeholder="Max age"
                 />
               </div>
               <div>
@@ -987,7 +923,7 @@ const RegistrationWizard = () => {
                   id="minHeight"
                   value={formData.minHeight}
                   onChange={(e) => updateFormData("minHeight", e.target.value)}
-                  placeholder="e.g., 5'2\""
+                  placeholder="Min height"
                 />
               </div>
               <div>
@@ -996,7 +932,7 @@ const RegistrationWizard = () => {
                   id="maxHeight"
                   value={formData.maxHeight}
                   onChange={(e) => updateFormData("maxHeight", e.target.value)}
-                  placeholder="e.g., 6'0\""
+                  placeholder="Max height"
                 />
               </div>
             </div>
@@ -1007,108 +943,60 @@ const RegistrationWizard = () => {
                 id="specialRequirements"
                 value={formData.specialRequirements}
                 onChange={(e) => updateFormData("specialRequirements", e.target.value)}
-                placeholder="Any specific requirements or preferences for your life partner..."
+                placeholder="Any special requirements or preferences..."
                 rows={4}
               />
-            </div>
-
-            <div className="bg-blue-50 p-4 rounded-lg">
-              <h4 className="font-semibold text-blue-800 mb-2">Registration Complete!</h4>
-              <p className="text-blue-700 text-sm">
-                You're about to complete your registration. After submitting, you'll be able to:
-              </p>
-              <ul className="text-blue-700 text-sm mt-2 space-y-1">
-                <li>• Browse and search for compatible matches</li>
-                <li>• Send and receive interests</li>
-                <li>• Communicate with matched profiles</li>
-                <li>• Access AI-powered compatibility scores</li>
-                <li>• Use advanced verification services</li>
-              </ul>
             </div>
           </div>
         );
 
       default:
-        return null;
+        return <div>Complete!</div>;
     }
   };
 
-  const progress = (currentStep / steps.length) * 100;
+  const progressPercentage = (currentStep / steps.length) * 100;
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-purple-50 to-blue-50 py-8">
+    <div className="min-h-screen bg-gradient-to-br from-purple-50 via-blue-50 to-pink-50 py-12">
       <div className="container mx-auto px-4 max-w-4xl">
-        <Card>
-          <CardHeader>
-            <CardTitle className="text-center text-2xl font-bold text-purple-800">
-              Create Your Matrimony Profile
-            </CardTitle>
-            <CardDescription className="text-center">
-              Step {currentStep} of {steps.length}: {steps.find(s => s.id === currentStep)?.title}
+        <Card className="shadow-2xl">
+          <CardHeader className="text-center bg-gradient-to-r from-purple-600 via-blue-600 to-pink-600 text-white rounded-t-lg">
+            <CardTitle className="text-2xl mb-2">Create Your Matrimonial Profile</CardTitle>
+            <CardDescription className="text-purple-100 mb-4">
+              Step {currentStep} of {steps.length}: {steps[currentStep - 1]?.title}
             </CardDescription>
-            <div className="mt-4">
-              <Progress value={progress} className="w-full" />
-            </div>
+            <Progress value={progressPercentage} className="w-full" />
           </CardHeader>
-          
-          <CardContent>
-            <div className="mb-6">
-              <div className="flex justify-center space-x-2 mb-6">
-                {steps.map((step) => {
-                  const IconComponent = step.icon;
-                  return (
-                    <div
-                      key={step.id}
-                      className={`flex items-center justify-center w-10 h-10 rounded-full ${
-                        step.id < currentStep
-                          ? 'bg-green-500 text-white'
-                          : step.id === currentStep
-                          ? 'bg-purple-500 text-white'
-                          : 'bg-gray-200 text-gray-500'
-                      }`}
-                    >
-                      {step.id < currentStep ? (
-                        <Check className="w-5 h-5" />
-                      ) : (
-                        <IconComponent className="w-5 h-5" />
-                      )}
-                    </div>
-                  );
-                })}
-              </div>
-            </div>
 
+          <CardContent className="p-8">
             {renderStep()}
 
             <div className="flex justify-between mt-8">
               <Button
-                variant="outline"
                 onClick={prevStep}
                 disabled={currentStep === 1}
+                variant="outline"
                 className="flex items-center space-x-2"
               >
                 <ArrowLeft className="w-4 h-4" />
                 <span>Previous</span>
               </Button>
-              
-              {currentStep === steps.length ? (
-                <Button 
-                  className="flex items-center space-x-2 bg-purple-600 hover:bg-purple-700"
-                  onClick={() => {
-                    console.log('Registration completed:', formData);
-                    // Handle form submission
-                  }}
-                >
-                  <Check className="w-4 h-4" />
-                  <span>Complete Registration</span>
-                </Button>
-              ) : (
+
+              {currentStep < steps.length ? (
                 <Button
                   onClick={nextStep}
-                  className="flex items-center space-x-2 bg-purple-600 hover:bg-purple-700"
+                  className="bg-gradient-to-r from-purple-600 to-blue-600 hover:from-purple-700 hover:to-blue-700 flex items-center space-x-2"
                 >
                   <span>Next</span>
                   <ArrowRight className="w-4 h-4" />
+                </Button>
+              ) : (
+                <Button
+                  className="bg-gradient-to-r from-green-600 to-blue-600 hover:from-green-700 hover:to-blue-700 flex items-center space-x-2"
+                >
+                  <Check className="w-4 h-4" />
+                  <span>Complete Registration</span>
                 </Button>
               )}
             </div>

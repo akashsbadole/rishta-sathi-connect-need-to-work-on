@@ -9,8 +9,8 @@ import { Badge } from "@/components/ui/badge";
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import { 
-  Search, Filter, Heart, Eye, MessageCircle, MapPin, 
-  GraduationCap, Briefcase, Users, Star, ArrowRight 
+  Filter, Heart, Eye, MessageCircle, MapPin, 
+  GraduationCap, Briefcase, Users, Star 
 } from "lucide-react";
 
 const SearchProfiles = () => {
@@ -319,7 +319,7 @@ const SearchProfiles = () => {
 
               <div className="flex space-x-2">
                 <Button className="flex-1">
-                  <Search className="w-4 h-4 mr-2" />
+                  <Filter className="w-4 h-4 mr-2" />
                   Search
                 </Button>
                 <Button variant="outline" onClick={resetFilters}>
