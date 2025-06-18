@@ -1,9 +1,11 @@
 
+import { ReactNode } from "react";
 import Header from "./Header";
 import Footer from "./Footer";
+import SmartChatbot from "./common/SmartChatbot";
 
 interface LayoutProps {
-  children: React.ReactNode;
+  children: ReactNode;
 }
 
 const Layout = ({ children }: LayoutProps) => {
@@ -14,6 +16,7 @@ const Layout = ({ children }: LayoutProps) => {
         {children}
       </main>
       <Footer />
+      <SmartChatbot />
     </div>
   );
 };

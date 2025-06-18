@@ -1,3 +1,4 @@
+
 import { useEffect } from "react";
 import { Toaster } from "@/components/ui/toaster";
 import { Toaster as Sonner } from "@/components/ui/sonner";
@@ -7,6 +8,7 @@ import { BrowserRouter, Routes, Route, useLocation } from "react-router-dom";
 import { CartProvider } from "@/components/cart/CartProvider";
 import { initGA, trackPageView } from "@/utils/analytics";
 import { useAppStore } from "@/store/useAppStore";
+import { useAuth } from "@/hooks/useAuth";
 import Index from "./pages/Index";
 import Login from "./pages/Login";
 import LoginMultiple from "./pages/LoginMultiple";
@@ -31,7 +33,6 @@ import SafetyTipsPage from "./pages/SafetyTips";
 import TicketSupport from "./pages/TicketSupport";
 import Payment from "./pages/Payment";
 import NotFound from "./pages/NotFound";
-import AIChat from "@/components/common/AIChat";
 import CartSidebar from "@/components/cart/CartSidebar";
 
 const queryClient = new QueryClient();
@@ -45,6 +46,38 @@ const AnalyticsTracker = () => {
   }, [location]);
 
   return null;
+};
+
+// Protected route wrapper
+const ProtectedRoute = ({ children }: { children: React.ReactNode }) => {
+  const { isSignedIn, isLoaded } = useAuth();
+
+  if (!isLoaded) {
+    return <div className="flex items-center justify-center min-h-screen">Loading...</div>;
+  }
+
+  if (!isSignedIn) {
+    return <LoginMultiple />;
+  }
+
+  return <>{children}</>;
+};
+
+// Role-based route wrapper
+const RoleBasedRoute = ({ 
+  children, 
+  allowedRoles 
+}: { 
+  children: React.ReactNode;
+  allowedRoles: string[];
+}) => {
+  const { user } = useAuth();
+
+  if (!user || !allowedRoles.includes(user.role)) {
+    return <div className="text-center py-8">Access Denied</div>;
+  }
+
+  return <>{children}</>;
 };
 
 const App = () => {
@@ -66,7 +99,6 @@ const App = () => {
               <Route path="/login" element={<Login />} />
               <Route path="/login-portal" element={<LoginMultiple />} />
               <Route path="/register" element={<Register />} />
-              <Route path="/search" element={<Search />} />
               <Route path="/browse-profiles" element={<BrowseProfilesPage />} />
               <Route path="/success-stories" element={<SuccessStoriesPage />} />
               <Route path="/contact-us" element={<ContactUsPage />} />
@@ -75,19 +107,62 @@ const App = () => {
               <Route path="/safety-tips" element={<SafetyTipsPage />} />
               <Route path="/support" element={<TicketSupport />} />
               <Route path="/payment" element={<Payment />} />
-              <Route path="/dashboard" element={<Dashboard />} />
-              <Route path="/profile" element={<Profile />} />
-              <Route path="/messages" element={<Messages />} />
-              <Route path="/interests" element={<Interests />} />
-              <Route path="/matches" element={<Matches />} />
-              <Route path="/ai-matching" element={<AIMatching />} />
-              <Route path="/background-verification" element={<BackgroundVerification />} />
               <Route path="/wedding-services" element={<WeddingServices />} />
-              <Route path="/wedding-planner" element={<WeddingPlanner />} />
-              <Route path="/premium" element={<PremiumFeatures />} />
+              
+              {/* Protected Routes */}
+              <Route path="/search" element={
+                <ProtectedRoute>
+                  <Search />
+                </ProtectedRoute>
+              } />
+              <Route path="/dashboard" element={
+                <ProtectedRoute>
+                  <Dashboard />
+                </ProtectedRoute>
+              } />
+              <Route path="/profile" element={
+                <ProtectedRoute>
+                  <Profile />
+                </ProtectedRoute>
+              } />
+              <Route path="/messages" element={
+                <ProtectedRoute>
+                  <Messages />
+                </ProtectedRoute>
+              } />
+              <Route path="/interests" element={
+                <ProtectedRoute>
+                  <Interests />
+                </ProtectedRoute>
+              } />
+              <Route path="/matches" element={
+                <ProtectedRoute>
+                  <Matches />
+                </ProtectedRoute>
+              } />
+              <Route path="/ai-matching" element={
+                <ProtectedRoute>
+                  <AIMatching />
+                </ProtectedRoute>
+              } />
+              <Route path="/background-verification" element={
+                <ProtectedRoute>
+                  <BackgroundVerification />
+                </ProtectedRoute>
+              } />
+              <Route path="/wedding-planner" element={
+                <ProtectedRoute>
+                  <WeddingPlanner />
+                </ProtectedRoute>
+              } />
+              <Route path="/premium" element={
+                <ProtectedRoute>
+                  <PremiumFeatures />
+                </ProtectedRoute>
+              } />
+              
               <Route path="*" element={<NotFound />} />
             </Routes>
-            <AIChat />
             <CartSidebar />
           </BrowserRouter>
         </CartProvider>
