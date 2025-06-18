@@ -7,12 +7,14 @@ import { Input } from "@/components/ui/input";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import { 
   Heart, Camera, Music, Car, Home, Utensils, Flower, 
-  Star, MapPin, Phone, Calendar, Search, Filter
+  Star, MapPin, Phone, Calendar, Search, Filter, ShoppingCart
 } from "lucide-react";
+import { useCart } from "@/components/cart/CartProvider";
 
 const WeddingServices = () => {
   const [selectedCategory, setSelectedCategory] = useState("all");
   const [searchQuery, setSearchQuery] = useState("");
+  const { addToCart } = useCart();
 
   const serviceCategories = [
     { id: "all", name: "All Services", icon: Heart },
@@ -32,12 +34,14 @@ const WeddingServices = () => {
       location: "Mumbai, Maharashtra",
       rating: 4.8,
       reviews: 156,
-      price: "₹2,50,000 - ₹5,00,000",
+      price: 350000,
+      priceDisplay: "₹2,50,000 - ₹5,00,000",
       description: "Luxurious wedding venue with traditional architecture and modern amenities",
       features: ["AC Banquet Hall", "Parking for 200 cars", "Bridal Room", "Catering Kitchen"],
       images: ["/placeholder.svg"],
       verified: true,
-      contact: "+91 98765 43210"
+      contact: "+91 98765 43210",
+      vendor: "Royal Events"
     },
     {
       id: 2,
@@ -46,12 +50,14 @@ const WeddingServices = () => {
       location: "Delhi, NCR",
       rating: 4.9,
       reviews: 89,
-      price: "₹75,000 - ₹1,50,000",
+      price: 112500,
+      priceDisplay: "₹75,000 - ₹1,50,000",
       description: "Professional wedding photography with cinematic videography",
       features: ["Pre-wedding Shoot", "Wedding Day Coverage", "Album Design", "Video Editing"],
       images: ["/placeholder.svg"],
       verified: true,
-      contact: "+91 87654 32109"
+      contact: "+91 87654 32109",
+      vendor: "Capture Studios"
     },
     {
       id: 3,
@@ -60,14 +66,27 @@ const WeddingServices = () => {
       location: "Bangalore, Karnataka",
       rating: 4.7,
       reviews: 203,
-      price: "₹800 - ₹1,200 per plate",
+      price: 1000,
+      priceDisplay: "₹800 - ₹1,200 per plate",
       description: "Authentic Indian cuisine with customizable menu options",
       features: ["Multi-cuisine Menu", "Live Counters", "Service Staff", "Decoration"],
       images: ["/placeholder.svg"],
       verified: true,
-      contact: "+91 76543 21098"
+      contact: "+91 76543 21098",
+      vendor: "Spice Garden"
     }
   ];
+
+  const addToCartHandler = (service: any) => {
+    addToCart({
+      id: `wedding-service-${service.id}`,
+      type: 'wedding_service',
+      name: service.name,
+      price: service.price,
+      description: service.description,
+      vendor: service.vendor
+    });
+  };
 
   const filteredServices = weddingServices.filter(service => {
     const matchesCategory = selectedCategory === "all" || service.category === selectedCategory;
@@ -175,14 +194,23 @@ const WeddingServices = () => {
                     ))}
                   </div>
 
-                  <div className="flex items-center justify-between">
-                    <span className="font-semibold text-blue-600">{service.price}</span>
-                    <div className="flex space-x-2">
-                      <Button size="sm" variant="outline">
-                        <Phone className="w-4 h-4" />
-                      </Button>
-                      <Button size="sm">Book Now</Button>
+                  <div className="space-y-2">
+                    <div className="flex items-center justify-between">
+                      <span className="font-semibold text-blue-600">{service.priceDisplay}</span>
+                      <div className="flex space-x-2">
+                        <Button size="sm" variant="outline">
+                          <Phone className="w-4 h-4" />
+                        </Button>
+                        <Button size="sm">Book Now</Button>
+                      </div>
                     </div>
+                    <Button 
+                      className="w-full bg-pink-500 hover:bg-pink-600"
+                      onClick={() => addToCartHandler(service)}
+                    >
+                      <ShoppingCart className="w-4 h-4 mr-2" />
+                      Add to Cart
+                    </Button>
                   </div>
                 </CardContent>
               </Card>

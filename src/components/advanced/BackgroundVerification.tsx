@@ -1,21 +1,22 @@
-
 import { useState } from "react";
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
 import { Progress } from "@/components/ui/progress";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
-import { Shield, CheckCircle, Clock, AlertTriangle, Upload, CreditCard } from "lucide-react";
+import { Shield, CheckCircle, Clock, AlertTriangle, Upload, CreditCard, ShoppingCart } from "lucide-react";
+import { useCart } from "@/components/cart/CartProvider";
 
 const BackgroundVerification = () => {
   const [selectedTier, setSelectedTier] = useState("basic");
   const [verificationStatus, setVerificationStatus] = useState("not_started");
+  const { addToCart } = useCart();
 
   const verificationTiers = [
     {
       id: "basic",
       name: "Basic Verification",
-      price: "₹500 - ₹1,000",
+      price: 750,
       features: [
         "Phone number OTP verification",
         "Email verification",
@@ -28,7 +29,7 @@ const BackgroundVerification = () => {
     {
       id: "standard", 
       name: "Standard Verification",
-      price: "₹1,500 - ₹3,000",
+      price: 2250,
       features: [
         "All Basic features",
         "Educational qualification verification",
@@ -42,7 +43,7 @@ const BackgroundVerification = () => {
     {
       id: "premium",
       name: "Premium Verification", 
-      price: "₹5,000 - ₹10,000",
+      price: 7500,
       features: [
         "All Standard features",
         "Professional background check",
@@ -57,7 +58,7 @@ const BackgroundVerification = () => {
     {
       id: "elite",
       name: "Elite Verification",
-      price: "₹15,000 - ₹25,000", 
+      price: 20000,
       features: [
         "All Premium features",
         "Comprehensive family background investigation",
@@ -70,6 +71,17 @@ const BackgroundVerification = () => {
       color: "bg-red-500"
     }
   ];
+
+  const addToCartHandler = (tier: any) => {
+    addToCart({
+      id: `verification-${tier.id}`,
+      type: 'verification',
+      name: tier.name,
+      price: tier.price,
+      description: `${tier.features.length} verification services included`,
+      tier: tier.name
+    });
+  };
 
   const verificationSteps = [
     { step: 1, title: "Document Upload", status: "completed" },
@@ -108,7 +120,7 @@ const BackgroundVerification = () => {
                   <div className={`w-8 h-8 rounded-full ${tier.color} mb-2`}></div>
                   <CardTitle className="text-lg">{tier.name}</CardTitle>
                   <CardDescription className="text-xl font-bold text-blue-600">
-                    {tier.price}
+                    ₹{tier.price.toLocaleString()}
                   </CardDescription>
                 </CardHeader>
                 <CardContent>
@@ -120,12 +132,22 @@ const BackgroundVerification = () => {
                       </li>
                     ))}
                   </ul>
-                  <Button 
-                    className="w-full mt-4"
-                    variant={selectedTier === tier.id ? "default" : "outline"}
-                  >
-                    {selectedTier === tier.id ? "Selected" : "Select Plan"}
-                  </Button>
+                  <div className="mt-4 space-y-2">
+                    <Button 
+                      className="w-full"
+                      variant={selectedTier === tier.id ? "default" : "outline"}
+                      onClick={() => setSelectedTier(tier.id)}
+                    >
+                      {selectedTier === tier.id ? "Selected" : "Select Plan"}
+                    </Button>
+                    <Button 
+                      className="w-full bg-pink-500 hover:bg-pink-600"
+                      onClick={() => addToCartHandler(tier)}
+                    >
+                      <ShoppingCart className="w-4 h-4 mr-2" />
+                      Add to Cart
+                    </Button>
+                  </div>
                 </CardContent>
               </Card>
             ))}

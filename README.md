@@ -6,6 +6,7 @@ A comprehensive matrimony platform tailored for Indian families with advanced fe
 ## 🚀 Core Features
 
 ### 🔐 Authentication & Security
+- **Multi-Role Login System** - Customer, Vendor, and Super Admin portals
 - **Multi-step Registration Process** - 8-step comprehensive profile creation
 - **Email/Phone OTP Verification** - Secure account verification
 - **JWT Authentication** - Token-based secure authentication
@@ -77,12 +78,13 @@ A comprehensive matrimony platform tailored for Indian families with advanced fe
 - **Fake Profile Detection** - Advanced fraud prevention
 - **Communication Analysis** - Message sentiment and compatibility insights
 - **Preference Learning** - AI learns user preferences over time
+- **AI Chat Assistant** - 24/7 AI-powered customer support
 
-## 🛡️ Multi-Tier Background Verification
+## 🛡️ Multi-Tier Background Verification System
 
 ### 📋 Verification Tiers
 
-#### **Basic Tier (₹500-1,000)**
+#### **Basic Tier (₹750)**
 - Phone number OTP verification
 - Email address verification
 - Aadhaar card verification via DigiLocker
@@ -90,7 +92,7 @@ A comprehensive matrimony platform tailored for Indian families with advanced fe
 - Social media profile cross-verification
 - Government ID validation
 
-#### **Standard Tier (₹1,500-3,000)**
+#### **Standard Tier (₹2,250)**
 - All Basic Tier features
 - Educational qualification verification
 - Employment verification (HR confirmation)
@@ -99,7 +101,7 @@ A comprehensive matrimony platform tailored for Indian families with advanced fe
 - Family composition verification
 - Professional references
 
-#### **Premium Tier (₹5,000-10,000)**
+#### **Premium Tier (₹7,500)**
 - All Standard Tier features
 - Professional background check through agencies
 - Property ownership verification
@@ -109,7 +111,7 @@ A comprehensive matrimony platform tailored for Indian families with advanced fe
 - Medical fitness certificate
 - Previous employment history
 
-#### **Elite Tier (₹15,000-25,000)**
+#### **Elite Tier (₹20,000)**
 - All Premium Tier features
 - Comprehensive family background investigation
 - Social standing and reputation analysis
@@ -126,6 +128,7 @@ A comprehensive matrimony platform tailored for Indian families with advanced fe
 - **Verification Badges** - Visual trust indicators
 - **Continuous Monitoring** - Ongoing status updates
 - **Annual Re-verification** - Mandatory yearly renewal
+- **Add to Cart Functionality** - Easy verification purchase
 
 ## 💒 Wedding Services Integration
 
@@ -136,6 +139,7 @@ A comprehensive matrimony platform tailored for Indian families with advanced fe
 - **Timeline Management** - Wedding planning scheduler
 - **Guest Management** - Invitation and RSVP system
 - **Venue Booking** - Direct venue reservation system
+- **AI Wedding Planner** - Intelligent planning assistance
 
 ### 🏪 Vendor Categories
 - **Photography & Videography** - Professional wedding documentation
@@ -150,14 +154,15 @@ A comprehensive matrimony platform tailored for Indian families with advanced fe
 
 ### 💰 Financial Services
 - **Wedding Loans** - Financing options for weddings
-- **EMI Plans** - Flexible payment options
+- **EMI Plans** - Flexible payment options (3, 6, 12 months)
 - **Insurance** - Wedding expense protection
 - **Budget Calculator** - AI-powered budget estimation
 - **Expense Tracking** - Real-time spending monitoring
+- **Cart System** - Easy service selection and booking
 
 ## 💎 Premium Subscription Plans
 
-### 🥈 Silver Plan (₹999/month)
+### 🥈 Silver Plan (₹899/month)
 - Unlimited profile views
 - Advanced search filters
 - Profile view analytics
@@ -165,7 +170,7 @@ A comprehensive matrimony platform tailored for Indian families with advanced fe
 - 50 interests per month
 - Basic compatibility reports
 
-### 🥇 Gold Plan (₹2,999/month)
+### 🥇 Gold Plan (₹2,699/month)
 - All Silver features
 - Unlimited messaging
 - Contact information access
@@ -174,7 +179,7 @@ A comprehensive matrimony platform tailored for Indian families with advanced fe
 - 100 interests per month
 - Detailed compatibility analysis
 
-### 💎 Platinum Plan (₹5,999/month)
+### 💎 Platinum Plan (₹5,399/month)
 - All Gold features
 - Background verification included (Standard Tier)
 - AI compatibility analysis
@@ -184,7 +189,7 @@ A comprehensive matrimony platform tailored for Indian families with advanced fe
 - Priority matching
 - Wedding vendor discounts
 
-### 👑 Elite Plan (₹9,999/month)
+### 👑 Elite Plan (₹8,999/month)
 - All Platinum features
 - Premium background verification
 - Personal matchmaker
@@ -217,6 +222,41 @@ A comprehensive matrimony platform tailored for Indian families with advanced fe
 - **Festival Celebrations** - Cultural event coordination
 - **Traditional Attire** - Regional wedding wear
 - **Language Preferences** - Communication language choices
+
+## 🛒 E-Commerce & Cart System
+
+### 🛍️ Shopping Cart Features
+- **Multi-Service Cart** - Add verification, wedding services, and plans
+- **Real-time Price Calculation** - Dynamic pricing with taxes and discounts
+- **Persistent Cart** - Saves items across sessions
+- **Quick Add to Cart** - One-click service addition
+- **Cart Sidebar** - Easy access and management
+- **Bulk Operations** - Add/remove multiple items
+
+### 💳 Payment Integration
+- **Multiple Payment Gateways** - Razorpay, PayPal integration
+- **EMI Options** - Flexible payment plans
+- **Secure Transactions** - 256-bit SSL encryption
+- **Multiple Payment Methods** - Cards, UPI, Net Banking, Wallets
+- **International Payments** - PayPal for global users
+- **Invoice Generation** - Automatic invoice creation
+
+## 🎧 Customer Support System
+
+### 🎫 Ticket Management
+- **Comprehensive Ticket System** - Track support requests
+- **Priority-based Support** - Low, Medium, High, Urgent priorities
+- **Category-wise Tickets** - Verification, Payment, Technical, etc.
+- **Real-time Status Updates** - Live ticket tracking
+- **Multi-channel Support** - Email, Phone, Chat integration
+- **SLA Management** - Response time tracking
+
+### 🤖 AI Customer Support
+- **24/7 AI Chat Assistant** - Instant support and guidance
+- **Natural Language Processing** - Understands user queries
+- **Smart Suggestions** - Contextual help and recommendations
+- **Escalation System** - Seamless handoff to human agents
+- **Multi-language Support** - Supports regional languages
 
 ## 📊 Analytics & Insights
 
@@ -264,7 +304,7 @@ A comprehensive matrimony platform tailored for Indian families with advanced fe
 ### Frontend Technologies
 - **React 18** - Modern UI library with hooks
 - **TypeScript** - Type-safe development
-- **Tailwind CSS** - Utility-first CSS framework
+- **Tailwind CSS** - Utility-first CSS framework with love-themed colors
 - **Shadcn/UI** - Modern component library
 - **Vite** - Fast build tool and dev server
 - **React Router** - Client-side routing
@@ -291,7 +331,7 @@ A comprehensive matrimony platform tailored for Indian families with advanced fe
 - **Fraud Detection** - Anomaly detection algorithms
 
 ### External Integrations
-- **Payment Gateways** - Razorpay, Stripe integration
+- **Payment Gateways** - Razorpay, PayPal integration
 - **SMS/Email Services** - Twilio, SendGrid for notifications
 - **Government APIs** - Document verification services
 - **Social Media APIs** - Profile verification
@@ -301,35 +341,45 @@ A comprehensive matrimony platform tailored for Indian families with advanced fe
 
 ## 📊 Database Schema
 
-The platform supports both SQLite (for development) and PostgreSQL (for production) with the following core tables:
+The platform supports both SQLite (for development) and PostgreSQL (for production) with comprehensive tables:
 
 ### Core User Tables
-- `users` - User accounts and authentication
-- `personal_details` - Personal information and preferences
+- `users` - User accounts and authentication with multi-role support
+- `user_profiles` - Personal information and preferences
+- `physical_details` - Physical attributes and health information
+- `religious_details` - Religious and cultural preferences
+- `horoscope_details` - Astrological information
 - `family_details` - Family background and values
 - `education_details` - Educational qualifications
 - `professional_details` - Career and income information
 - `location_details` - Geographic information
-- `religious_details` - Religious and cultural preferences
-- `lifestyle_details` - Hobbies and lifestyle choices
 - `partner_preferences` - Matching criteria and requirements
 
 ### Advanced Feature Tables
 - `background_verification` - Verification status and reports
+- `verification_checks` - Individual verification components
+- `verification_documents` - Document uploads and validation
 - `ai_compatibility_scores` - ML-generated compatibility data
-- `wedding_services` - Vendor and service information
-- `wedding_bookings` - Service bookings and payments
-- `horoscope_details` - Astrological information
+- `wedding_vendors` - Wedding service providers
+- `wedding_service_packages` - Service offerings
+- `wedding_service_bookings` - Service bookings and payments
 - `user_analytics` - Behavioral tracking data
 - `success_stories` - Platform success metrics
-- `subscription_plans` - Premium feature access
 
-### Communication Tables
+### Communication & Commerce
 - `conversations` - Chat sessions and metadata
 - `messages` - Encrypted messaging system
-- `interests` - Profile interest tracking
-- `profile_views` - View analytics and history
-- `notifications` - Real-time notification system
+- `user_interests` - Profile interest tracking
+- `shopping_cart` - E-commerce cart functionality
+- `payments` - Payment transactions
+- `subscription_plans` - Premium feature access
+- `user_subscriptions` - Active subscriptions
+
+### Support & Analytics
+- `support_tickets` - Customer support system
+- `support_ticket_messages` - Support conversations
+- `platform_metrics` - Performance analytics
+- `admin_logs` - Administrative activity tracking
 
 ## 🚀 Getting Started
 
@@ -389,6 +439,8 @@ npm run dev
 6. **Access the Application**
 - Open browser to `http://localhost:5173`
 - Register a new account or use demo credentials
+- Try the AI chat assistant
+- Explore the shopping cart functionality
 
 ### Environment Variables
 ```env
@@ -403,8 +455,8 @@ JWT_EXPIRY=24h
 # Payment Gateways
 RAZORPAY_KEY_ID=your-razorpay-key-id
 RAZORPAY_KEY_SECRET=your-razorpay-secret
-STRIPE_PUBLISHABLE_KEY=your-stripe-publishable-key
-STRIPE_SECRET_KEY=your-stripe-secret-key
+PAYPAL_CLIENT_ID=your-paypal-client-id
+PAYPAL_CLIENT_SECRET=your-paypal-secret
 
 # Communication Services
 TWILIO_ACCOUNT_SID=your-twilio-account-sid
@@ -428,7 +480,7 @@ SOCIAL_AUTH_GOOGLE_KEY=your-google-client-id
 ### Authentication Endpoints
 ```
 POST /api/auth/register - User registration with OTP
-POST /api/auth/login - User login with JWT
+POST /api/auth/login - Multi-role user login with JWT
 POST /api/auth/verify-otp - OTP verification
 POST /api/auth/refresh-token - Refresh JWT token
 POST /api/auth/forgot-password - Password reset request
@@ -453,21 +505,13 @@ POST /api/interests - Send interest to profile
 GET /api/interests - Get sent/received interests
 ```
 
-### Communication
-```
-GET /api/conversations - Get conversation list
-POST /api/conversations - Start new conversation
-GET /api/messages/:conversationId - Get messages
-POST /api/messages - Send message
-PUT /api/messages/:id/read - Mark message as read
-```
-
 ### Background Verification
 ```
 POST /api/verification/initiate - Start verification process
 POST /api/verification/documents - Upload verification documents
 GET /api/verification/status - Check verification status
 GET /api/verification/report - Get verification report
+POST /api/verification/add-to-cart - Add verification to cart
 ```
 
 ### Wedding Services
@@ -476,14 +520,42 @@ GET /api/wedding/vendors - Browse wedding vendors
 POST /api/wedding/booking - Book wedding service
 GET /api/wedding/bookings - Get user bookings
 PUT /api/wedding/booking/:id - Update booking
+POST /api/wedding/add-to-cart - Add service to cart
 ```
 
-### Subscription Management
+### E-Commerce & Cart
 ```
-GET /api/subscriptions/plans - Get available plans
-POST /api/subscriptions/subscribe - Subscribe to plan
-PUT /api/subscriptions/upgrade - Upgrade subscription
-POST /api/subscriptions/cancel - Cancel subscription
+GET /api/cart - Get user's cart items
+POST /api/cart/add - Add item to cart
+PUT /api/cart/update/:id - Update cart item
+DELETE /api/cart/remove/:id - Remove item from cart
+POST /api/cart/checkout - Proceed to checkout
+```
+
+### Payment Processing
+```
+POST /api/payments/razorpay/initiate - Start Razorpay payment
+POST /api/payments/paypal/initiate - Start PayPal payment
+POST /api/payments/verify - Verify payment completion
+GET /api/payments/history - Get payment history
+POST /api/payments/refund - Process refund
+```
+
+### Support System
+```
+GET /api/support/tickets - Get user tickets
+POST /api/support/tickets - Create new ticket
+PUT /api/support/tickets/:id - Update ticket
+POST /api/support/tickets/:id/messages - Add ticket message
+GET /api/support/categories - Get support categories
+```
+
+### AI Features
+```
+POST /api/ai/chat - AI chat assistant
+GET /api/ai/recommendations - Get AI recommendations
+POST /api/ai/compatibility - Calculate AI compatibility
+GET /api/ai/insights - Get user insights
 ```
 
 ## 🧪 Testing
@@ -544,9 +616,10 @@ docker run -p 3000:3000 -e DATABASE_URL="your-db-url" rishta-sathi
 - PWA caching strategies
 - Bundle size optimization
 - Tree shaking for unused code
+- Modern font loading (Inter, Playfair Display, Dancing Script)
 
 ### Backend Optimizations
-- Database indexing
+- Database indexing (25+ optimized indexes)
 - Query optimization
 - Response caching
 - API rate limiting
@@ -587,7 +660,7 @@ docker run -p 3000:3000 -e DATABASE_URL="your-db-url" rishta-sathi
 ### Technical Support
 - **Email**: tech-support@rishtasathi.com
 - **Phone**: +91-1234567890
-- **Live Chat**: Available 24/7 in app
+- **Live Chat**: Available 24/7 in app with AI assistant
 - **Documentation**: https://docs.rishtasathi.com
 
 ### Business Inquiries
@@ -633,17 +706,19 @@ We welcome contributions from the community! Please read our [Contributing Guide
 
 ### Phase 1 (Q1 2024) ✅
 - ✅ Core platform development
-- ✅ Basic matching algorithm
-- ✅ User registration and profiles
-- ✅ Communication system
-- ✅ Search and filtering
+- ✅ Multi-role authentication system
+- ✅ AI chat assistant
+- ✅ Shopping cart functionality
+- ✅ Background verification system
+- ✅ Wedding services integration
 
 ### Phase 2 (Q2 2024) ✅
 - ✅ AI-powered matching
-- ✅ Background verification system
-- ✅ Wedding services integration
+- ✅ Payment gateway integration (Razorpay, PayPal)
+- ✅ Customer support ticket system
 - ✅ Premium subscription features
 - ✅ Mobile-responsive design
+- ✅ Love-themed UI design
 
 ### Phase 3 (Q3 2024) 🚧
 - 🚧 Mobile app development (React Native)
