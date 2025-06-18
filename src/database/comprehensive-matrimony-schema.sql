@@ -1,4 +1,3 @@
-
 -- Comprehensive Matrimony Platform Database Schema
 -- Supports both SQLite and PostgreSQL
 -- Created: 2024
@@ -963,6 +962,94 @@ INSERT INTO subscription_plans (plan_name, plan_type, duration_months, original_
 ('Gold Plan', 'gold', 1, 2999, 2699, '["All Silver features", "Unlimited messaging", "Contact information access", "Wedding planning assistance", "Dedicated relationship manager", "100 interests per month", "Detailed compatibility analysis"]', 100, -1, -1, false, 10.00, true, true, false, true),
 ('Platinum Plan', 'platinum', 1, 5999, 5399, '["All Gold features", "Background verification included (Standard Tier)", "AI compatibility analysis", "Concierge services", "Professional photoshoot", "Unlimited interests", "Priority matching", "Wedding vendor discounts"]', -1, -1, -1, true, 15.00, true, true, true, true),
 ('Elite Plan', 'elite', 1, 9999, 8999, '["All Platinum features", "Premium background verification", "Personal matchmaker", "Family consultation services", "Custom match curation", "Exclusive events access", "White-glove service"]', -1, -1, -1, true, 25.00, true, true, true, true);
+
+-- Contact form submissions table
+CREATE TABLE contact_submissions (
+    id UUID PRIMARY KEY DEFAULT gen_random_uuid(),
+    first_name VARCHAR(100) NOT NULL,
+    last_name VARCHAR(100) NOT NULL,
+    email VARCHAR(255) NOT NULL,
+    phone VARCHAR(20) NOT NULL,
+    subject VARCHAR(500) NOT NULL,
+    category contact_category NOT NULL,
+    priority contact_priority NOT NULL DEFAULT 'medium',
+    message TEXT NOT NULL,
+    status contact_status NOT NULL DEFAULT 'new',
+    assigned_to UUID REFERENCES users(id),
+    created_at TIMESTAMP WITH TIME ZONE DEFAULT CURRENT_TIMESTAMP,
+    updated_at TIMESTAMP WITH TIME ZONE DEFAULT CURRENT_TIMESTAMP,
+    resolved_at TIMESTAMP WITH TIME ZONE,
+    response TEXT,
+    response_by UUID REFERENCES users(id),
+    ip_address INET,
+    user_agent TEXT,
+    source VARCHAR(50) DEFAULT 'website'
+);
+
+-- Enums for contact form
+CREATE TYPE contact_category AS ENUM (
+    'general',
+    'technical',
+    'billing',
+    'verification',
+    'wedding_services',
+    'complaint'
+);
+
+CREATE TYPE contact_priority AS ENUM (
+    'low',
+    'medium',
+    'high',
+    'urgent'
+);
+
+CREATE TYPE contact_status AS ENUM (
+    'new',
+    'in_progress',
+    'pending_info',
+    'resolved',
+    'closed'
+);
+
+-- Indexes for contact submissions
+CREATE INDEX idx_contact_submissions_email ON contact_submissions(email);
+CREATE INDEX idx_contact_submissions_status ON contact_submissions(status);
+CREATE INDEX idx_contact_submissions_category ON contact_submissions(category);
+CREATE INDEX idx_contact_submissions_created_at ON contact_submissions(created_at DESC);
+CREATE INDEX idx_contact_submissions_priority ON contact_submissions(priority);
+
+-- Trigger for contact submissions updated_at
+CREATE TRIGGER update_contact_submissions_updated_at
+    BEFORE UPDATE ON contact_submissions
+    FOR EACH ROW
+    EXECUTE FUNCTION update_updated_at_column();
+
+-- Google Analytics tracking events table
+CREATE TABLE analytics_events (
+    id UUID PRIMARY KEY DEFAULT gen_random_uuid(),
+    user_id UUID REFERENCES users(id),
+    session_id VARCHAR(255),
+    event_name VARCHAR(100) NOT NULL,
+    event_category VARCHAR(100),
+    event_label VARCHAR(255),
+    event_value INTEGER,
+    page_url TEXT,
+    referrer TEXT,
+    user_agent TEXT,
+    ip_address INET,
+    country VARCHAR(2),
+    city VARCHAR(100),
+    device_type VARCHAR(50),
+    browser VARCHAR(50),
+    os VARCHAR(50),
+    created_at TIMESTAMP WITH TIME ZONE DEFAULT CURRENT_TIMESTAMP
+);
+
+-- Indexes for analytics
+CREATE INDEX idx_analytics_events_user_id ON analytics_events(user_id);
+CREATE INDEX idx_analytics_events_event_name ON analytics_events(event_name);
+CREATE INDEX idx_analytics_events_created_at ON analytics_events(created_at DESC);
+CREATE INDEX idx_analytics_events_session_id ON analytics_events(session_id);
 
 -- ================================================================
 -- END OF COMPREHENSIVE MATRIMONY SCHEMA

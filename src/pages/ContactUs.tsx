@@ -1,10 +1,6 @@
-
 import Layout from "@/components/Layout";
-import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
-import { Button } from "@/components/ui/button";
-import { Input } from "@/components/ui/input";
-import { Label } from "@/components/ui/label";
-import { Textarea } from "@/components/ui/textarea";
+import ContactForm from "@/components/forms/ContactForm";
+import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Phone, Mail, MapPin, Clock } from "lucide-react";
 
 const ContactUsPage = () => {
@@ -20,45 +16,7 @@ const ContactUsPage = () => {
 
         <div className="grid lg:grid-cols-2 gap-12">
           <div>
-            <Card>
-              <CardHeader>
-                <CardTitle>Send us a message</CardTitle>
-                <CardDescription>Fill out the form below and we'll get back to you soon</CardDescription>
-              </CardHeader>
-              <CardContent>
-                <form className="space-y-4">
-                  <div className="grid md:grid-cols-2 gap-4">
-                    <div>
-                      <Label htmlFor="firstName">First Name</Label>
-                      <Input id="firstName" placeholder="Enter your first name" />
-                    </div>
-                    <div>
-                      <Label htmlFor="lastName">Last Name</Label>
-                      <Input id="lastName" placeholder="Enter your last name" />
-                    </div>
-                  </div>
-                  <div>
-                    <Label htmlFor="email">Email</Label>
-                    <Input id="email" type="email" placeholder="Enter your email" />
-                  </div>
-                  <div>
-                    <Label htmlFor="phone">Phone Number</Label>
-                    <Input id="phone" type="tel" placeholder="Enter your phone number" />
-                  </div>
-                  <div>
-                    <Label htmlFor="subject">Subject</Label>
-                    <Input id="subject" placeholder="What is this regarding?" />
-                  </div>
-                  <div>
-                    <Label htmlFor="message">Message</Label>
-                    <Textarea id="message" placeholder="Tell us how we can help you" rows={5} />
-                  </div>
-                  <Button className="w-full bg-gradient-to-r from-purple-600 to-blue-600">
-                    Send Message
-                  </Button>
-                </form>
-              </CardContent>
-            </Card>
+            <ContactForm />
           </div>
 
           <div className="space-y-6">
