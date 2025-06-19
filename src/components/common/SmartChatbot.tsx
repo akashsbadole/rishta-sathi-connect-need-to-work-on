@@ -1,4 +1,3 @@
-
 import React, { useState, useRef, useEffect } from 'react';
 import { MessageCircle, X, Send, Bot, User } from 'lucide-react';
 import { Button } from '@/components/ui/button';
@@ -26,7 +25,9 @@ const SmartChatbot = () => {
   const { user: storeUser } = useAppStore();
   
   const user = clerkUser || storeUser;
-  const userName = user?.name || user?.fullName || user?.firstName || 'Guest';
+  const userName = clerkUser ? 
+    (clerkUser.fullName || clerkUser.firstName || 'Guest') : 
+    (storeUser?.name || 'Guest');
 
   const scrollToBottom = () => {
     messagesEndRef.current?.scrollIntoView({ behavior: 'smooth' });

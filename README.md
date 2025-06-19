@@ -381,6 +381,286 @@ The platform supports both SQLite (for development) and PostgreSQL (for producti
 - `platform_metrics` - Performance analytics
 - `admin_logs` - Administrative activity tracking
 
+## 🏗️ Complete Database Schema
+
+### User Management System
+```sql
+-- Core Users Table
+CREATE TABLE users (
+    id UUID PRIMARY KEY DEFAULT gen_random_uuid(),
+    email VARCHAR(255) UNIQUE NOT NULL,
+    phone VARCHAR(20),
+    password_hash VARCHAR(255),
+    role user_role NOT NULL DEFAULT 'customer',
+    email_verified BOOLEAN DEFAULT FALSE,
+    phone_verified BOOLEAN DEFAULT FALSE,
+    profile_completed BOOLEAN DEFAULT FALSE,
+    is_active BOOLEAN DEFAULT TRUE,
+    last_login TIMESTAMP WITH TIME ZONE,
+    created_at TIMESTAMP WITH TIME ZONE DEFAULT CURRENT_TIMESTAMP,
+    updated_at TIMESTAMP WITH TIME ZONE DEFAULT CURRENT_TIMESTAMP
+);
+
+-- User Profiles (Personal Information)
+CREATE TABLE user_profiles (
+    id UUID PRIMARY KEY DEFAULT gen_random_uuid(),
+    user_id UUID REFERENCES users(id) ON DELETE CASCADE,
+    first_name VARCHAR(100) NOT NULL,
+    last_name VARCHAR(100) NOT NULL,
+    middle_name VARCHAR(100),
+    display_name VARCHAR(200),
+    gender gender_type NOT NULL,
+    date_of_birth DATE NOT NULL,
+    age INTEGER GENERATED ALWAYS AS (EXTRACT(YEAR FROM AGE(CURRENT_DATE, date_of_birth))) STORED,
+    profile_photo_url VARCHAR(500),
+    bio TEXT,
+    interests TEXT[],
+    hobbies TEXT[],
+    languages TEXT[],
+    visible_to visibility_type DEFAULT 'all',
+    created_at TIMESTAMP WITH TIME ZONE DEFAULT CURRENT_TIMESTAMP,
+    updated_at TIMESTAMP WITH TIME ZONE DEFAULT CURRENT_TIMESTAMP
+);
+
+-- Physical Details
+CREATE TABLE physical_details (
+    id UUID PRIMARY KEY DEFAULT gen_random_uuid(),
+    user_id UUID REFERENCES users(id) ON DELETE CASCADE,
+    height_cm INTEGER,
+    weight_kg INTEGER,
+    body_type body_type_enum,
+    complexion complexion_type,
+    blood_group blood_group_type,
+    physical_disability BOOLEAN DEFAULT FALSE,
+    disability_details TEXT,
+    created_at TIMESTAMP WITH TIME ZONE DEFAULT CURRENT_TIMESTAMP,
+    updated_at TIMESTAMP WITH TIME ZONE DEFAULT CURRENT_TIMESTAMP
+);
+```
+
+### Wedding Services & Vendor Management
+```sql
+-- Wedding Vendors
+CREATE TABLE wedding_vendors (
+    id UUID PRIMARY KEY DEFAULT gen_random_uuid(),
+    user_id UUID REFERENCES users(id) ON DELETE CASCADE,
+    business_name VARCHAR(255) NOT NULL,
+    business_type vendor_category NOT NULL,
+    description TEXT,
+    experience_years INTEGER,
+    rating DECIMAL(3,2) DEFAULT 0.00,
+    total_reviews INTEGER DEFAULT 0,
+    verified BOOLEAN DEFAULT FALSE,
+    featured BOOLEAN DEFAULT FALSE,
+    commission_rate DECIMAL(5,2) DEFAULT 15.00,
+    service_areas TEXT[],
+    created_at TIMESTAMP WITH TIME ZONE DEFAULT CURRENT_TIMESTAMP,
+    updated_at TIMESTAMP WITH TIME ZONE DEFAULT CURRENT_TIMESTAMP
+);
+
+-- Wedding Service Packages
+CREATE TABLE wedding_service_packages (
+    id UUID PRIMARY KEY DEFAULT gen_random_uuid(),
+    vendor_id UUID REFERENCES wedding_vendors(id) ON DELETE CASCADE,
+    package_name VARCHAR(255) NOT NULL,
+    description TEXT,
+    base_price DECIMAL(10,2) NOT NULL,
+    duration_hours INTEGER,
+    max_guests INTEGER,
+    includes TEXT[],
+    excludes TEXT[],
+    is_customizable BOOLEAN DEFAULT TRUE,
+    is_active BOOLEAN DEFAULT TRUE,
+    created_at TIMESTAMP WITH TIME ZONE DEFAULT CURRENT_TIMESTAMP,
+    updated_at TIMESTAMP WITH TIME ZONE DEFAULT CURRENT_TIMESTAMP
+);
+
+-- Service Bookings
+CREATE TABLE wedding_service_bookings (
+    id UUID PRIMARY KEY DEFAULT gen_random_uuid(),
+    customer_id UUID REFERENCES users(id) ON DELETE CASCADE,
+    vendor_id UUID REFERENCES wedding_vendors(id) ON DELETE CASCADE,
+    package_id UUID REFERENCES wedding_service_packages(id),
+    booking_date TIMESTAMP WITH TIME ZONE NOT NULL,
+    event_date DATE NOT NULL,
+    venue_address TEXT,
+    guest_count INTEGER,
+    total_amount DECIMAL(10,2) NOT NULL,
+    commission_amount DECIMAL(10,2),
+    advance_paid DECIMAL(10,2) DEFAULT 0.00,
+    status booking_status DEFAULT 'pending',
+    special_requirements TEXT,
+    cancellation_reason TEXT,
+    created_at TIMESTAMP WITH TIME ZONE DEFAULT CURRENT_TIMESTAMP,
+    updated_at TIMESTAMP WITH TIME ZONE DEFAULT CURRENT_TIMESTAMP
+);
+```
+
+### Background Verification System
+```sql
+-- Background Verification
+CREATE TABLE background_verification (
+    id UUID PRIMARY KEY DEFAULT gen_random_uuid(),
+    user_id UUID REFERENCES users(id) ON DELETE CASCADE,
+    verification_tier verification_tier NOT NULL,
+    status verification_status DEFAULT 'pending',
+    initiated_date TIMESTAMP WITH TIME ZONE DEFAULT CURRENT_TIMESTAMP,
+    completed_date TIMESTAMP WITH TIME ZONE,
+    total_cost DECIMAL(8,2),
+    verification_score INTEGER CHECK (verification_score >= 0 AND verification_score <= 100),
+    report_url VARCHAR(500),
+    verified_by VARCHAR(255),
+    notes TEXT,
+    created_at TIMESTAMP WITH TIME ZONE DEFAULT CURRENT_TIMESTAMP,
+    updated_at TIMESTAMP WITH TIME ZONE DEFAULT CURRENT_TIMESTAMP
+);
+
+-- Individual Verification Checks
+CREATE TABLE verification_checks (
+    id UUID PRIMARY KEY DEFAULT gen_random_uuid(),
+    verification_id UUID REFERENCES background_verification(id) ON DELETE CASCADE,
+    check_type verification_check_type NOT NULL,
+    status verification_status DEFAULT 'pending',
+    result verification_result,
+    evidence_urls TEXT[],
+    verified_data JSONB,
+    verification_date TIMESTAMP WITH TIME ZONE,
+    expiry_date DATE,
+    created_at TIMESTAMP WITH TIME ZONE DEFAULT CURRENT_TIMESTAMP,
+    updated_at TIMESTAMP WITH TIME ZONE DEFAULT CURRENT_TIMESTAMP
+);
+```
+
+### E-Commerce & Payment System
+```sql
+-- Shopping Cart
+CREATE TABLE shopping_cart (
+    id UUID PRIMARY KEY DEFAULT gen_random_uuid(),
+    user_id UUID REFERENCES users(id) ON DELETE CASCADE,
+    item_type cart_item_type NOT NULL,
+    item_id UUID NOT NULL,
+    quantity INTEGER DEFAULT 1,
+    unit_price DECIMAL(10,2) NOT NULL,
+    total_price DECIMAL(10,2) GENERATED ALWAYS AS (quantity * unit_price) STORED,
+    added_at TIMESTAMP WITH TIME ZONE DEFAULT CURRENT_TIMESTAMP,
+    updated_at TIMESTAMP WITH TIME ZONE DEFAULT CURRENT_TIMESTAMP
+);
+
+-- Payments
+CREATE TABLE payments (
+    id UUID PRIMARY KEY DEFAULT gen_random_uuid(),
+    user_id UUID REFERENCES users(id) ON DELETE CASCADE,
+    amount DECIMAL(10,2) NOT NULL,
+    currency VARCHAR(10) DEFAULT 'INR',
+    payment_method payment_method NOT NULL,
+    payment_gateway VARCHAR(50),
+    gateway_transaction_id VARCHAR(255),
+    status payment_status DEFAULT 'pending',
+    paid_at TIMESTAMP WITH TIME ZONE,
+    refunded_at TIMESTAMP WITH TIME ZONE,
+    refund_amount DECIMAL(10,2),
+    metadata JSONB,
+    created_at TIMESTAMP WITH TIME ZONE DEFAULT CURRENT_TIMESTAMP,
+    updated_at TIMESTAMP WITH TIME ZONE DEFAULT CURRENT_TIMESTAMP
+);
+```
+
+### Support & Communication System
+```sql
+-- Support Tickets
+CREATE TABLE support_tickets (
+    id UUID PRIMARY KEY DEFAULT gen_random_uuid(),
+    user_id UUID REFERENCES users(id) ON DELETE CASCADE,
+    subject VARCHAR(500) NOT NULL,
+    category support_category NOT NULL,
+    priority support_priority DEFAULT 'medium',
+    status support_status DEFAULT 'open',
+    description TEXT NOT NULL,
+    assigned_to UUID REFERENCES users(id),
+    resolved_at TIMESTAMP WITH TIME ZONE,
+    first_response_at TIMESTAMP WITH TIME ZONE,
+    last_activity_at TIMESTAMP WITH TIME ZONE DEFAULT CURRENT_TIMESTAMP,
+    created_at TIMESTAMP WITH TIME ZONE DEFAULT CURRENT_TIMESTAMP,
+    updated_at TIMESTAMP WITH TIME ZONE DEFAULT CURRENT_TIMESTAMP
+);
+
+-- Support Ticket Messages
+CREATE TABLE support_ticket_messages (
+    id UUID PRIMARY KEY DEFAULT gen_random_uuid(),
+    ticket_id UUID REFERENCES support_tickets(id) ON DELETE CASCADE,
+    sender_id UUID REFERENCES users(id) ON DELETE CASCADE,
+    message TEXT NOT NULL,
+    is_internal BOOLEAN DEFAULT FALSE,
+    attachments TEXT[],
+    created_at TIMESTAMP WITH TIME ZONE DEFAULT CURRENT_TIMESTAMP
+);
+```
+
+### AI & Analytics System
+```sql
+-- AI Compatibility Scores
+CREATE TABLE ai_compatibility_scores (
+    id UUID PRIMARY KEY DEFAULT gen_random_uuid(),
+    user_id UUID REFERENCES users(id) ON DELETE CASCADE,
+    potential_match_id UUID REFERENCES users(id) ON DELETE CASCADE,
+    overall_score DECIMAL(5,2) CHECK (overall_score >= 0 AND overall_score <= 100),
+    personality_score DECIMAL(5,2),
+    lifestyle_score DECIMAL(5,2),
+    values_score DECIMAL(5,2),
+    family_score DECIMAL(5,2),
+    career_score DECIMAL(5,2),
+    cultural_score DECIMAL(5,2),
+    calculated_at TIMESTAMP WITH TIME ZONE DEFAULT CURRENT_TIMESTAMP,
+    expires_at TIMESTAMP WITH TIME ZONE
+);
+
+-- User Analytics
+CREATE TABLE user_analytics (
+    id UUID PRIMARY KEY DEFAULT gen_random_uuid(),
+    user_id UUID REFERENCES users(id) ON DELETE CASCADE,
+    event_type analytics_event_type NOT NULL,
+    event_data JSONB,
+    ip_address INET,
+    user_agent TEXT,
+    session_id VARCHAR(255),
+    created_at TIMESTAMP WITH TIME ZONE DEFAULT CURRENT_TIMESTAMP
+);
+```
+
+## 🎯 Dummy Data Integration
+
+The platform includes 30 comprehensive dummy profiles with:
+
+### 🧑‍🤝‍🧑 User Profiles (10 each role)
+- **10 Customers** - Complete matrimonial profiles with preferences
+- **10 Vendors** - Wedding service providers across categories
+- **10 Admins** - System administrators with full access
+
+### 📋 Background Verification Data
+- **120 Verification Records** - 4 tiers × 30 users
+- **Multiple Check Types** - Identity, education, employment, criminal
+- **Realistic Status Distribution** - Pending, completed, failed states
+
+### 💒 Wedding Services Data
+- **50 Service Packages** - Photography, catering, venue, decoration
+- **100 Bookings** - Customer-vendor service bookings
+- **Commission Tracking** - Vendor earnings and platform revenue
+
+### 🎫 Support System Data
+- **75 Support Tickets** - Across all categories and priorities
+- **200 Ticket Messages** - Customer-support conversations
+- **Realistic Response Times** - SLA tracking and metrics
+
+### 🛒 E-Commerce Data
+- **60 Cart Items** - Verification services and wedding packages
+- **90 Payment Records** - Multiple payment methods and statuses
+- **EMI Tracking** - Installment payment histories
+
+### 📊 Analytics Data
+- **500+ User Events** - Profile views, searches, interests
+- **AI Compatibility Scores** - ML-generated match scores
+- **Platform Metrics** - Usage statistics and KPIs
+
 ## 🚀 Getting Started
 
 ### Prerequisites

@@ -10,9 +10,12 @@ const DashboardPage = () => {
   const { user: storeUser } = useAppStore();
   
   const user = clerkUser || storeUser;
+  const userRole = clerkUser ? 
+    (clerkUser.publicMetadata?.role as string) || 'customer' : 
+    storeUser?.role || 'customer';
 
   const renderDashboard = () => {
-    switch (user?.role) {
+    switch (userRole) {
       case 'vendor':
         return <VendorDashboard />;
       case 'admin':

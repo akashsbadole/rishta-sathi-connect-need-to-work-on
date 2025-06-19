@@ -76,12 +76,15 @@ const RoleBasedRoute = ({
   children: React.ReactNode;
   allowedRoles: string[];
 }) => {
-  const { user } = useAuth();
+  const { user: clerkUser } = useAuth();
   const { user: storeUser } = useAppStore();
   
-  const currentUser = user || storeUser;
+  const currentUser = clerkUser || storeUser;
+  const userRole = clerkUser ? 
+    (clerkUser.publicMetadata?.role as string) || 'customer' : 
+    storeUser?.role || 'customer';
 
-  if (!currentUser || !allowedRoles.includes(currentUser.role)) {
+  if (!currentUser || !allowedRoles.includes(userRole)) {
     return <div className="text-center py-8">Access Denied</div>;
   }
 
