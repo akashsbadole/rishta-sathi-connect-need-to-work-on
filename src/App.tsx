@@ -51,12 +51,17 @@ const AnalyticsTracker = () => {
 // Protected route wrapper
 const ProtectedRoute = ({ children }: { children: React.ReactNode }) => {
   const { isSignedIn, isLoaded } = useAuth();
+  const { isAuthenticated } = useAppStore();
 
   if (!isLoaded) {
     return <div className="flex items-center justify-center min-h-screen">Loading...</div>;
   }
 
-  if (!isSignedIn) {
+  // If Clerk is configured, use Clerk auth, otherwise use app store auth
+  const hasClerkKey = import.meta.env.VITE_CLERK_PUBLISHABLE_KEY;
+  const isUserAuthenticated = hasClerkKey ? isSignedIn : isAuthenticated;
+
+  if (!isUserAuthenticated) {
     return <LoginMultiple />;
   }
 
@@ -72,8 +77,11 @@ const RoleBasedRoute = ({
   allowedRoles: string[];
 }) => {
   const { user } = useAuth();
+  const { user: storeUser } = useAppStore();
+  
+  const currentUser = user || storeUser;
 
-  if (!user || !allowedRoles.includes(user.role)) {
+  if (!currentUser || !allowedRoles.includes(currentUser.role)) {
     return <div className="text-center py-8">Access Denied</div>;
   }
 

@@ -24,7 +24,9 @@ export const useAuth = () => {
   }, [user, isSignedIn, isLoaded, setUser, logout]);
 
   const handleSignOut = async () => {
-    await signOut();
+    if (signOut) {
+      await signOut();
+    }
     logout();
   };
 

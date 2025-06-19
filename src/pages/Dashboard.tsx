@@ -1,11 +1,15 @@
 
 import { useAuth } from "@/hooks/useAuth";
+import { useAppStore } from "@/store/useAppStore";
 import CustomerDashboard from "@/components/dashboard/CustomerDashboard";
 import VendorDashboard from "@/components/dashboard/VendorDashboard";
 import Layout from "@/components/Layout";
 
 const DashboardPage = () => {
-  const { user } = useAuth();
+  const { user: clerkUser } = useAuth();
+  const { user: storeUser } = useAppStore();
+  
+  const user = clerkUser || storeUser;
 
   const renderDashboard = () => {
     switch (user?.role) {
